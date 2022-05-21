@@ -6,7 +6,7 @@ function BananaSite({ Component, pageProps }: AppProps) {
   return (
     <Wrapper>
       <GlobalStyles />
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </Wrapper>
   );
 }
