@@ -1,0 +1,9 @@
+export { default as ChevronDown } from "./chevron-down";
+export { default as Facebook } from "./facebook";
+export { default as Instagram } from "./instagram";
+export { default as Loader } from "./loader";
+export { default as Menu } from "./menu";
+export { default as Search } from "./search";
+export { default as ShoppingBag } from "./shopping-bag";
+export { default as X } from "./x";
+export { default as Youtube } from "./youtube";
