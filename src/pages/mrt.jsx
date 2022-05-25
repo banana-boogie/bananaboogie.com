@@ -6,11 +6,15 @@ import Icon from "@components/Icon";
 import Layout from "@components/Layout";
 import SearchInput from "@components/SearchInput";
 import TextInput from "@components/TextInput";
+import UnstyledButton from "@components/UnstyledButton";
 
-const IndexPage = () => {
+const MRT = () => {
+  const keywordsDefault =
+    "Incredible, Amazing, Terrific, Love, Hate, Curious, Worth, Scam, Awful, Fail, Best, Incredible, Fantastic, Great, Horrbile, Nightmare, Terrified, Scary, Scared";
   const [searchTerm, setSearchTerm] = React.useState("");
-  const [subreddits, setSubreddits] = React.useState("thermomix");
-  const [keywords, setKeywords] = React.useState("love, hate, sucks, best");
+  const [subreddits, setSubreddits] = React.useState("");
+  const [urls, setUrls] = React.useState("");
+  const [keywords, setKeywords] = React.useState(keywordsDefault);
   const [searchData, setSearchData] = React.useState(null);
   const [isSearching, setIsSearching] = React.useState(false);
 
@@ -24,7 +28,8 @@ const IndexPage = () => {
     const query = {
       searchTerm,
       keywords,
-      subreddits
+      subreddits,
+      urls
     };
     try {
       setIsSearching(true);
@@ -41,7 +46,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <Wrapper>
-        {isSearching && <LoadingIcon id="loader" />}
+        {isSearching && <LoadingIcon id="loader" color="white" />}
 
         {!isSearching && !searchData && (
           <SearchWrapper>
@@ -56,11 +61,20 @@ const IndexPage = () => {
               value={subreddits}
               onChange={(e) => setSubreddits(e.target.value)}
             />
+            <UrlsInput
+              label="URLs"
+              value={urls}
+              onChange={(e) => setUrls(e.target.value)}
+            />
             <KeywordsInput
               label="Keywords"
               value={keywords}
               onChange={(e) => setKeywords(e.target.value)}
             />
+
+            <SearchButton onClick={async () => await search()}>
+              Search
+            </SearchButton>
           </SearchWrapper>
         )}
 
@@ -70,6 +84,7 @@ const IndexPage = () => {
               return (
                 <PostWrapper key={index}>
                   <Comment>{data.comment}</Comment>
+                  <Keywords>{(data.keywords || []).join(", ")}</Keywords>
                   <Author>{data.author}</Author>
                   <BottomWrapper>
                     <ThreadLink
@@ -99,7 +114,7 @@ const Wrapper = styled.div`
 const SearchWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 32px;
 `;
 
 const SearchBar = styled(SearchInput)`
@@ -112,6 +127,22 @@ const SearchBar = styled(SearchInput)`
 const SubredditInput = styled(TextInput)``;
 
 const KeywordsInput = styled(TextInput)``;
+
+const UrlsInput = styled(TextInput)``;
+
+const SearchButton = styled(UnstyledButton)`
+  border: 2px solid var(--color-yellow-500);
+  margin-top: 24px;
+  padding: 16px;
+  color: var(--color-white);
+  text-align: center;
+  font-size: 1.5rem;
+
+  &:hover {
+    background: var(--color-yellow-500);
+    color: black;
+  }
+`;
 
 const DataWrapper = styled.div`
   display: flex;
@@ -130,6 +161,8 @@ const BottomWrapper = styled.div`
 `;
 
 const Comment = styled.p``;
+const Keywords = styled.p``;
+
 const ThreadLink = styled.a`
   color: var(--color-blue-600);
 `;
@@ -144,9 +177,14 @@ const rotate = keyframes`
     transform: rotate(1turn);
   }
 `;
+
 const LoadingIcon = styled(Icon)`
-  color: var(--color-primary);
-  animation: ${rotate} 2000ms infinite linear;
+  display: grid;
+  place-content: center;
+
+  & > svg {
+    animation: ${rotate} 2000ms infinite linear;
+  }
 `;
 
-export default IndexPage;
+export default MRT;

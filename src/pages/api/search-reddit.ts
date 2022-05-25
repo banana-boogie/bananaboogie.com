@@ -62,8 +62,9 @@ export default async function handler(
   try {
     let {
       searchTerm,
-      keywords = ["love", "hate"],
-      subreddits = ["thermomix"],
+      keywords,
+      subreddits,
+      urls,
       sort = "top",
       timeframe = "year",
       limit = 25
@@ -73,22 +74,26 @@ export default async function handler(
       subreddits = [subreddits];
     }
 
-    if (keywords && !Array.isArray(keywords)) {
-      keywords = [keywords];
+    if (keywords && typeof keywords === "string") {
+      keywords = keywords.split(",").map((s) => s.trim());
     }
 
-    const subredditURLs = subreddits.map(
+    if (urls && typeof urls === "string") {
+      urls = urls.split(",").map((s) => parseRedditURL(s.trim()));
+    }
+
+    const subredditURLs = (subreddits || []).map(
       (subreddit: any) =>
         `/r/${subreddit}?sort=${sort}&t=${timeframe}&limit=${limit}${
           searchTerm && `&q=${searchTerm}`
         }`
     );
 
-    const redditThreads = await Promise.all(
-      subredditURLs.map((subredditURL: string) =>
-        fetchRedditThreads(subredditURL)
-      )
+    const subRedditThreads = await Promise.all(
+      subredditURLs.map((url: string) => fetchRedditThreads(url))
     );
+
+    const redditThreads = [...subRedditThreads, ...urls];
 
     const redditComments = await Promise.all(
       // The previous promise.all wrapped the results in an array, creating nested array
@@ -163,6 +168,7 @@ function recurseThroughListings(
       const entireComment = parsedData.comment || "";
 
       const keywordMatch = entireComment.match(keywordRegex);
+
       if (keywordMatch) {
         // filter for unique words
         parsedData.keywords = keywordMatch.filter(
@@ -198,4 +204,9 @@ function parseCommentData(reply: RedditListingData): ParsedData {
   };
 
   return parsedData;
+}
+
+function parseRedditURL(url: string) {
+  const subredditIndex = url.indexOf("/r/");
+  return subredditIndex !== -1 ? url.slice(subredditIndex) : null;
 }

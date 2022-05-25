@@ -3,12 +3,16 @@ import styled from "styled-components";
 export default function Layout({ children }) {
   return (
     <>
-      <header />
+      <Header />
       <Main>{children}</Main>
       <footer />
     </>
   );
 }
+
+const Header = styled.header`
+  min-height: 128px;
+`;
 
 const Main = styled.div`
   flex: 1;
