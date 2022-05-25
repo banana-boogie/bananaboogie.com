@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { COLORS } from "../../constants";
+import { COLORS, WEIGHTS } from "../../contstants/css";
 
 const GlobalStyles = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -188,6 +188,9 @@ html {
     Silence the warning about missing Reach Dialog styles
   */
   --reach-dialog: 1;
+  --font-weight-normal: ${WEIGHTS.normal};
+  --font-weight-medium: ${WEIGHTS.medium};
+  --font-weight-bold: ${WEIGHTS.bold};
   --color-background: hsl(${COLORS.black});
   --color-text: hsl(${COLORS.white});
   --color-white: hsl(${COLORS.white});

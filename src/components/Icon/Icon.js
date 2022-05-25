@@ -9,7 +9,8 @@ import {
   Instagram,
   Youtube,
   Facebook,
-  Loader
+  Loader,
+  Copy
 } from "./IconPack";
 
 const icons = {
@@ -21,7 +22,8 @@ const icons = {
   facebook: Facebook,
   instagram: Instagram,
   youtube: Youtube,
-  loader: Loader
+  loader: Loader,
+  copy: Copy
 };
 
 const Icon = ({ id, color = "black", size, strokeWidth, ...delegated }) => {

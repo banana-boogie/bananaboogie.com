@@ -8,15 +8,18 @@ import SearchInput from "@components/SearchInput";
 import TextInput from "@components/TextInput";
 import UnstyledButton from "@components/UnstyledButton";
 
+import { MRT as MRT_CONSTANTS } from "../contstants";
+
 const MRT = () => {
-  const keywordsDefault =
-    "Incredible, Amazing, Terrific, Love, Hate, Curious, Worth, Scam, Awful, Fail, Best, Incredible, Fantastic, Great, Horrbile, Nightmare, Terrified, Scary, Scared";
+  const keywordsDefault = MRT_CONSTANTS.keywords.join(", ");
+
   const [searchTerm, setSearchTerm] = React.useState("");
   const [subreddits, setSubreddits] = React.useState("");
   const [urls, setUrls] = React.useState("");
   const [keywords, setKeywords] = React.useState(keywordsDefault);
   const [searchData, setSearchData] = React.useState(null);
   const [isSearching, setIsSearching] = React.useState(false);
+  const [clipboardCopied, setClipboardCopied] = React.useState({});
 
   async function handleKeyDown(event) {
     if (event.key === "Enter") {
@@ -41,6 +44,18 @@ const MRT = () => {
     } finally {
       setIsSearching(false);
     }
+  }
+
+  async function copyToClipboard(data, key) {
+    const { link, author, keywords, comment, postedAt } = data;
+
+    const parsedComment = `${comment.replace(/[\n\r]/g, "")}`;
+    const text = [link, keywords, parsedComment, author, postedAt].join("\t");
+
+    await navigator.clipboard.writeText(text);
+    setClipboardCopied({ [key]: true });
+
+    setTimeout(setClipboardCopied.bind(null, {}), 1500);
   }
 
   return (
@@ -95,6 +110,16 @@ const MRT = () => {
                       Original Thread
                     </ThreadLink>
                     <DatePosted>{data.postedAt}</DatePosted>
+                    <CopyWrapper>
+                      <CopyButton
+                        onClick={async () => await copyToClipboard(data, index)}
+                      >
+                        <Icon id="copy" color="white" />
+                      </CopyButton>
+                      {clipboardCopied[index] && (
+                        <CopyTooltip>Copied!</CopyTooltip>
+                      )}
+                    </CopyWrapper>
                   </BottomWrapper>
                 </PostWrapper>
               );
@@ -168,6 +193,22 @@ const ThreadLink = styled.a`
 `;
 const Author = styled.span``;
 const DatePosted = styled.span``;
+
+const CopyWrapper = styled.div`
+  position: relative;
+`;
+const CopyTooltip = styled.span`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 8px;
+  color: black;
+  background: var(--color-yellow-500);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-bold);
+`;
+const CopyButton = styled(UnstyledButton)``;
 
 const rotate = keyframes`
   from{
