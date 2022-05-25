@@ -95,21 +95,27 @@ const MRT = () => {
 
         {!isSearching && searchData && (
           <DataWrapper>
+            <BackButtonWrapper>
+              <BackButton
+                onClick={() => {
+                  setSearchData(null);
+                }}
+              >
+                Go Back
+              </BackButton>
+            </BackButtonWrapper>
             {searchData.map((data, index) => {
               return (
                 <PostWrapper key={index}>
-                  <Comment>{data.comment}</Comment>
-                  <Keywords>{(data.keywords || []).join(", ")}</Keywords>
-                  <Author>{data.author}</Author>
-                  <BottomWrapper>
+                  <PostHeader>
                     <ThreadLink
                       href={data.link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Original Thread
+                      <Icon id="link" color="var(--color-blue-600)" />
+                      {data.threadTitle}
                     </ThreadLink>
-                    <DatePosted>{data.postedAt}</DatePosted>
                     <CopyWrapper>
                       <CopyButton
                         onClick={async () => await copyToClipboard(data, index)}
@@ -120,7 +126,20 @@ const MRT = () => {
                         <CopyTooltip>Copied!</CopyTooltip>
                       )}
                     </CopyWrapper>
-                  </BottomWrapper>
+                  </PostHeader>
+                  <Keywords>
+                    {(data.keywords || [])
+                      .sort((a, b) => a.localeCompare(b))
+                      .map((k) => `${k[0].toUpperCase()}${k.slice(1)}`)
+                      .join(", ")}
+                  </Keywords>
+                  <figure>
+                    <Comment>{data.comment}</Comment>
+                    <CommentCaption>
+                      <Author>{data.author}</Author>
+                      <DatePosted>{data.postedAt}</DatePosted>
+                    </CommentCaption>
+                  </figure>
                 </PostWrapper>
               );
             })}
@@ -174,21 +193,59 @@ const DataWrapper = styled.div`
   flex-direction: column;
   gap: 72px;
   max-width: 800px;
+  isolation: isolate;
+`;
+const BackButtonWrapper = styled.div`
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  height: 100px;
+  width: 100%;
+  background: var(--color-background);
+  display: flex;
+  align-items: center;
+`;
+const BackButton = styled(UnstyledButton)`
+  font-size: 1.3rem;
+  text-decoration: underline;
 `;
 const PostWrapper = styled.div`
   color: var(--color-white);
   border: 1px solid var(--color-white);
   padding: 16px;
 `;
-const BottomWrapper = styled.div`
+const PostHeader = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const Comment = styled.p``;
+const Comment = styled.blockquote`
+  margin-bottom: 12px;
+  &::before {
+    content: "“";
+    font-size: 1.3rem;
+    margin-right: 4px;
+  }
+  &::after {
+    content: "”";
+    font-size: 1.3rem;
+    margin-left: 4px;
+  }
+`;
+const CommentCaption = styled.figcaption`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+`;
 const Keywords = styled.p``;
 
 const ThreadLink = styled.a`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
   color: var(--color-blue-600);
 `;
 const Author = styled.span``;
@@ -196,10 +253,14 @@ const DatePosted = styled.span``;
 
 const CopyWrapper = styled.div`
   position: relative;
+  display: flex;
+  justify-content: end;
+  align-items: start;
+  min-width: 60px;
 `;
 const CopyTooltip = styled.span`
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
   padding: 8px;
   color: black;

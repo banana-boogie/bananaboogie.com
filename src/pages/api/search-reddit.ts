@@ -132,10 +132,14 @@ async function fetchRedditData(url: string, keywords: string[]) {
     const response = await reddit.get(url);
     let allComments: Array<ParsedData> = [];
     const keywordRegex = createKeywordRegex(keywords);
-
+    const threadTitle = response[0]?.data?.children[0]?.data?.title || "";
     response.forEach((redditNode: RedditNode) => {
       const listings = redditNode.data.children;
-      const comments = recurseThroughListings(listings, keywordRegex);
+      const comments = recurseThroughListings(
+        threadTitle,
+        listings,
+        keywordRegex
+      );
       allComments = [...allComments, ...comments];
     });
 
@@ -153,6 +157,7 @@ function createKeywordRegex(keywords: String | String[]) {
 }
 
 function recurseThroughListings(
+  threadTitle: string,
   listings: Array<RedditListing>,
   keywordRegex: RegExp
 ) {
@@ -164,7 +169,7 @@ function recurseThroughListings(
     }
     listings.forEach((listing: RedditListing) => {
       const { replies } = listing.data;
-      const parsedData = parseCommentData(listing.data);
+      const parsedData = { ...parseCommentData(listing.data), threadTitle };
       const entireComment = parsedData.comment || "";
 
       const keywordMatch = entireComment.match(keywordRegex);

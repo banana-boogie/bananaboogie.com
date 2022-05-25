@@ -16,7 +16,8 @@ const Header = styled.header`
 
 const Main = styled.div`
   flex: 1;
-  max-width: 512px;
+  width: clamp(500px, 65%, 700px);
+  max-width: 100%;
   padding: 0 16px;
   margin: 0 auto;
 `;

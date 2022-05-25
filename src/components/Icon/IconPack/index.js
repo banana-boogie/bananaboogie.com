@@ -2,6 +2,7 @@ export { default as ChevronDown } from "./chevron-down";
 export { default as Copy } from "./copy";
 export { default as Facebook } from "./facebook";
 export { default as Instagram } from "./instagram";
+export { default as Link } from "./link";
 export { default as Loader } from "./loader";
 export { default as Menu } from "./menu";
 export { default as Search } from "./search";
