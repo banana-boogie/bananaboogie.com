@@ -7,6 +7,7 @@ import Layout from "@components/Layout";
 import SearchInput from "@components/SearchInput";
 import TextInput from "@components/TextInput";
 import UnstyledButton from "@components/UnstyledButton";
+import Highlighter from "@components/Highlighter";
 
 import { MRT as MRT_CONSTANTS } from "../contstants";
 
@@ -134,7 +135,9 @@ const MRT = () => {
                       .join(", ")}
                   </Keywords>
                   <figure>
-                    <Comment>{data.comment}</Comment>
+                    <Comment>
+                      <Highlighter words={data.comment} />
+                    </Comment>
                     <CommentCaption>
                       <Author>{data.author}</Author>
                       <DatePosted>{data.postedAt}</DatePosted>

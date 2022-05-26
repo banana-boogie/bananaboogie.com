@@ -1,24 +1,30 @@
-export const keywords = [
-  "Incredible",
-  "Amazing",
-  "Terrific",
-  "Love",
-  "Hate",
-  "Curious",
-  "Worth",
-  "Scam",
-  "Awful",
-  "Fail",
-  "Best",
-  "Incredible",
-  "Fantastic",
-  "Great",
-  "Horrbile",
-  "Nightmare",
-  "Terrified",
-  "Scary",
-  "Scared",
-  "Overwhelm",
-  "Overwhelming",
-  "Unhappy"
-];
+export const keywordsLabelled = {
+  good: [
+    "Incredible",
+    "Amazing",
+    "Terrific",
+    "Love",
+    "Curious",
+    "Worth",
+    "Best",
+    "Incredible",
+    "Fantastic",
+    "Great"
+  ],
+  bad: [
+    "Unhappy",
+    "Hate",
+    "Scam",
+    "Awful",
+    "Fail",
+    "Horrbile",
+    "Nightmare",
+    "Terrified",
+    "Scary",
+    "Scared",
+    "Overwhelm",
+    "Overwhelming"
+  ]
+};
+
+export const keywords = [...keywordsLabelled.good, ...keywordsLabelled.bad];
