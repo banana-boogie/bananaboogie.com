@@ -11,7 +11,10 @@ import {
   Facebook,
   Loader,
   Copy,
-  Link
+  Link,
+  Save,
+  FilePlus,
+  Plus
 } from "./IconPack";
 
 const icons = {
@@ -25,7 +28,10 @@ const icons = {
   youtube: Youtube,
   loader: Loader,
   copy: Copy,
-  link: Link
+  link: Link,
+  save: Save,
+  "file-plus": FilePlus,
+  plus: Plus
 };
 
 const Icon = ({ id, color = "black", size, strokeWidth, ...delegated }) => {

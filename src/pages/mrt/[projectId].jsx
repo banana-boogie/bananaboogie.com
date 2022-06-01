@@ -7,9 +7,10 @@ import Layout from "@components/Layout";
 import SearchInput from "@components/SearchInput";
 import TextInput from "@components/TextInput";
 import UnstyledButton from "@components/UnstyledButton";
-import Highlighter from "@components/Highlighter";
+import CommentCard from "@/components/CommentCard";
 
-import { MRT as MRT_CONSTANTS } from "../contstants";
+import { MRT as MRT_CONSTANTS } from "@/contstants";
+import Loading from "@/components/Loading";
 
 const MRT = () => {
   const keywordsDefault = MRT_CONSTANTS.keywords.join(", ");
@@ -20,7 +21,6 @@ const MRT = () => {
   const [keywords, setKeywords] = React.useState(keywordsDefault);
   const [searchData, setSearchData] = React.useState(null);
   const [isSearching, setIsSearching] = React.useState(false);
-  const [clipboardCopied, setClipboardCopied] = React.useState({});
 
   async function handleKeyDown(event) {
     if (event.key === "Enter") {
@@ -47,22 +47,10 @@ const MRT = () => {
     }
   }
 
-  async function copyToClipboard(data, key) {
-    const { link, author, keywords, comment, postedAt } = data;
-
-    const parsedComment = `${comment.replace(/[\n\r]/g, "")}`;
-    const text = [link, keywords, parsedComment, author, postedAt].join("\t");
-
-    await navigator.clipboard.writeText(text);
-    setClipboardCopied({ [key]: true });
-
-    setTimeout(setClipboardCopied.bind(null, {}), 1500);
-  }
-
   return (
     <Layout>
       <Wrapper>
-        {isSearching && <LoadingIcon id="loader" color="white" />}
+        {isSearching && <Loading />}
 
         {!isSearching && !searchData && (
           <SearchWrapper>
@@ -106,45 +94,7 @@ const MRT = () => {
               </BackButton>
             </BackButtonWrapper>
             {searchData.map((data, index) => {
-              return (
-                <PostWrapper key={index}>
-                  <PostHeader>
-                    <ThreadLink
-                      href={data.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Icon id="link" color="var(--color-blue-600)" />
-                      {data.threadTitle}
-                    </ThreadLink>
-                    <CopyWrapper>
-                      <CopyButton
-                        onClick={async () => await copyToClipboard(data, index)}
-                      >
-                        <Icon id="copy" color="white" />
-                      </CopyButton>
-                      {clipboardCopied[index] && (
-                        <CopyTooltip>Copied!</CopyTooltip>
-                      )}
-                    </CopyWrapper>
-                  </PostHeader>
-                  <Keywords>
-                    {(data.keywords || [])
-                      .sort((a, b) => a.localeCompare(b))
-                      .map((k) => `${k[0].toUpperCase()}${k.slice(1)}`)
-                      .join(", ")}
-                  </Keywords>
-                  <figure>
-                    <Comment>
-                      <Highlighter words={data.comment} />
-                    </Comment>
-                    <CommentCaption>
-                      <Author>{data.author}</Author>
-                      <DatePosted>{data.postedAt}</DatePosted>
-                    </CommentCaption>
-                  </figure>
-                </PostWrapper>
-              );
+              return <CommentCard data={data} key={index} name={index} />;
             })}
           </DataWrapper>
         )}
@@ -211,85 +161,6 @@ const BackButtonWrapper = styled.div`
 const BackButton = styled(UnstyledButton)`
   font-size: 1.3rem;
   text-decoration: underline;
-`;
-const PostWrapper = styled.div`
-  color: var(--color-white);
-  border: 1px solid var(--color-white);
-  padding: 16px;
-`;
-const PostHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Comment = styled.blockquote`
-  margin-bottom: 12px;
-  &::before {
-    content: "“";
-    font-size: 1.3rem;
-    margin-right: 4px;
-  }
-  &::after {
-    content: "”";
-    font-size: 1.3rem;
-    margin-left: 4px;
-  }
-`;
-const CommentCaption = styled.figcaption`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-`;
-const Keywords = styled.p``;
-
-const ThreadLink = styled.a`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 12px;
-  font-size: 1.2rem;
-  color: var(--color-blue-600);
-`;
-const Author = styled.span``;
-const DatePosted = styled.span``;
-
-const CopyWrapper = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: end;
-  align-items: start;
-  min-width: 60px;
-`;
-const CopyTooltip = styled.span`
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 8px;
-  color: black;
-  background: var(--color-yellow-500);
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: var(--font-weight-bold);
-`;
-const CopyButton = styled(UnstyledButton)``;
-
-const rotate = keyframes`
-  from{
-    transform: rotate(0turn);
-  }
-  to {
-    transform: rotate(1turn);
-  }
-`;
-
-const LoadingIcon = styled(Icon)`
-  display: grid;
-  place-content: center;
-
-  & > svg {
-    animation: ${rotate} 2000ms infinite linear;
-  }
 `;
 
 export default MRT;

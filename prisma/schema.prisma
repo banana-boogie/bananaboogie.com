@@ -27,6 +27,7 @@ model Comment {
   author       String
   comment      String
   dateSearched DateTime @default(now())
+  keywords     String[]
   link         String
   postedAt     DateTime
   tags         String[]
