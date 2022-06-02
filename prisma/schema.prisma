@@ -26,10 +26,9 @@ model Comment {
   projectId    String
   author       String
   comment      String
-  dateSearched DateTime @default(now())
   keywords     String[]
   link         String
   postedAt     DateTime
+  subreddit    String?
   tags         String[]
-  // projectID Projects
 }

@@ -3,14 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 
 type Data = {
-  author: string;
-  comment: string;
-  keywords: string[];
-  link: string;
-  tags: string[];
-  projectId: string;
-  subreddit: string | null;
-  postedAt: Date;
+  name: string;
 };
 
 type Error = {
@@ -25,34 +18,16 @@ export default async function handler(
 ) {
   // Create new home
   if (req.method === "POST") {
-    const {
-      author,
-      comment,
-      link,
-      postedAt,
-      tags,
-      projectId,
-      keywords,
-      subreddit
-    } = req.body;
+    const { name } = req.body;
     try {
-      const saved = await prisma.comment.create({
-        data: {
-          author,
-          comment,
-          link,
-          postedAt,
-          tags,
-          projectId,
-          keywords,
-          subreddit
-        }
+      const saved = await prisma.project.create({
+        data: { name }
       });
 
       res.status(200).json(saved);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Error saving comment" });
+      res.status(500).json({ message: "Error creating project." });
     }
   }
   // HTTP method not supported!

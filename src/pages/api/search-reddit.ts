@@ -33,6 +33,7 @@ type RedditListingData = {
   author: String;
   created_utc: number;
   author_flair_css_class: String;
+  subreddit: string;
   replies: RedditReply; // can also be empty string
 };
 
@@ -67,7 +68,7 @@ export default async function handler(
       urls,
       sort = "top",
       timeframe = "year",
-      limit = 25
+      limit = 3
     } = req.body;
 
     if (subreddits && !Array.isArray(subreddits)) {
@@ -198,14 +199,16 @@ function recurseThroughListings(
 }
 
 function parseCommentData(reply: RedditListingData): ParsedData {
-  const { selftext, body, url, author, created_utc, permalink } = reply;
+  const { selftext, body, url, author, created_utc, permalink, subreddit } =
+    reply;
+
   const link = url || (permalink && `https://reddit.com${permalink}`) || "";
   const parsedData = {
     comment: selftext || body, // t3 posts use selftext, t1 uses body
     link: link,
     author: author,
-    postedAt: created_utc ? new Date(created_utc * 1000).toDateString() : "N/A", // unix timestamp
-    searchDate: new Date().toDateString()
+    subreddit,
+    postedAt: created_utc ? new Date(created_utc * 1000).toDateString() : "N/A" // unix timestamp
   };
 
   return parsedData;

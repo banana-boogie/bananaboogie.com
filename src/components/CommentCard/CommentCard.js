@@ -5,9 +5,13 @@ import styled from "styled-components";
 import Icon from "@components/Icon";
 import Highlighter from "@components/Highlighter";
 import UnstyledButton from "@components/UnstyledButton";
+import Loading from "../Loading";
 
-const CommentCard = ({ data, name }) => {
+const CommentCard = ({ data, name, projectId }) => {
   const [clipboardCopied, setClipboardCopied] = React.useState({});
+  const [commentSaved, setCommentSaved] = React.useState({});
+  const [disableSave, setDisableSave] = React.useState({});
+  const [isLoading, setIsLoading] = React.useState(false);
 
   async function copyToClipboard(data) {
     const { link, author, keywords, comment, postedAt } = data;
@@ -28,12 +32,33 @@ const CommentCard = ({ data, name }) => {
       .join(", ");
   };
 
-  function save() {
-    axios.post("/api/comments", data);
+  async function save() {
+    const { author, comment, keywords, link, subreddit } = data;
+    const save = {
+      author,
+      link,
+      comment,
+      keywords,
+      projectId,
+      subreddit,
+      postedAt: new Date(data.postedAt)
+    };
+    setIsLoading(true);
+    await axios.post("/api/comments", save);
+    setIsLoading(false);
+    setCommentSaved({ [name]: true });
+    setDisableSave({ [name]: true });
+    setTimeout(setCommentSaved.bind(null, {}), 2500);
   }
 
   return (
     <Wrapper>
+      {commentSaved[name] && <SavedNotification>SAVED!</SavedNotification>}
+      {isLoading && (
+        <LoadingWrapper>
+          <Loading />
+        </LoadingWrapper>
+      )}
       <Header>
         <ThreadLink href={data.link} target="_blank" rel="noopener noreferrer">
           <Icon id="link" color="var(--color-blue-600)" />
@@ -46,7 +71,7 @@ const CommentCard = ({ data, name }) => {
             </CopyButton>
             {clipboardCopied[name] && <CopyTooltip>Copied!</CopyTooltip>}
           </CopyWrapper>
-          <SaveButton onClick={save}>
+          <SaveButton onClick={save} disabled={disableSave[name]}>
             <Icon id="save" color="white" />
           </SaveButton>
         </ActionsWrapper>
@@ -69,7 +94,28 @@ const Wrapper = styled.div`
   color: var(--color-white);
   border: 1px solid var(--color-white);
   padding: 16px;
+  position: relative;
+  isolation: isolate;
 `;
+
+const Backdrop = styled.div`
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: grid;
+  place-content: center;
+  background: hsl(0deg 0% 0% / 0.9);
+`;
+
+const SavedNotification = styled(Backdrop)`
+  font-size: 1.3rem;
+`;
+
+const LoadingWrapper = styled(Backdrop)``;
+
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -119,6 +165,7 @@ const CopyWrapper = styled.div`
   justify-content: end;
   align-items: start;
   min-width: 60px;
+  background: transparent;
 `;
 const CopyTooltip = styled.span`
   position: absolute;

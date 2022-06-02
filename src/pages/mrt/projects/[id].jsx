@@ -1,8 +1,8 @@
-import * as React from "react";
-import styled, { keyframes } from "styled-components";
 import axios from "axios";
+import * as React from "react";
+import { useRouter } from "next/router";
+import styled from "styled-components";
 
-import Icon from "@components/Icon";
 import Layout from "@components/Layout";
 import SearchInput from "@components/SearchInput";
 import TextInput from "@components/TextInput";
@@ -13,6 +13,9 @@ import { MRT as MRT_CONSTANTS } from "@/contstants";
 import Loading from "@/components/Loading";
 
 const MRT = () => {
+  const router = useRouter();
+  const { id } = router.query;
+
   const keywordsDefault = MRT_CONSTANTS.keywords.join(", ");
 
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -84,17 +87,24 @@ const MRT = () => {
 
         {!isSearching && searchData && (
           <DataWrapper>
-            <BackButtonWrapper>
-              <BackButton
+            <ResetSearchWrapper>
+              <ResetSearch
                 onClick={() => {
                   setSearchData(null);
                 }}
               >
-                Go Back
-              </BackButton>
-            </BackButtonWrapper>
+                Reset Search
+              </ResetSearch>
+            </ResetSearchWrapper>
             {searchData.map((data, index) => {
-              return <CommentCard data={data} key={index} name={index} />;
+              return (
+                <CommentCard
+                  data={data}
+                  key={index}
+                  name={index}
+                  projectId={id}
+                />
+              );
             })}
           </DataWrapper>
         )}
@@ -148,7 +158,7 @@ const DataWrapper = styled.div`
   max-width: 800px;
   isolation: isolate;
 `;
-const BackButtonWrapper = styled.div`
+const ResetSearchWrapper = styled.div`
   z-index: 1;
   position: sticky;
   top: 0;
@@ -158,9 +168,9 @@ const BackButtonWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
-const BackButton = styled(UnstyledButton)`
-  font-size: 1.3rem;
-  text-decoration: underline;
+const ResetSearch = styled(UnstyledButton)`
+  font-size: 1.5rem;
+  text-decoration: none;
 `;
 
 export default MRT;

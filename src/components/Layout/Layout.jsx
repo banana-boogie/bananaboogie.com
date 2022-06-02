@@ -1,9 +1,17 @@
 import styled from "styled-components";
+import { useRouter } from "next/router";
+import UnstyledButton from "@components/UnstyledButton";
 
-export default function Layout({ children }) {
+export default function Layout({ hideBackButton, children }) {
+  const router = useRouter();
+
   return (
     <>
-      <Header />
+      <Header>
+        <BackButton hide={hideBackButton} onClick={() => router.back()}>
+          Back
+        </BackButton>
+      </Header>
       <Main>{children}</Main>
       <footer />
     </>
@@ -12,6 +20,14 @@ export default function Layout({ children }) {
 
 const Header = styled.header`
   min-height: 128px;
+`;
+
+const BackButton = styled(UnstyledButton)`
+  display: ${({ hide }) => (hide ? "none" : "block")};
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+  margin: 32px;
 `;
 
 const Main = styled.div`
