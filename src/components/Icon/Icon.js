@@ -14,7 +14,9 @@ import {
   Link,
   Save,
   FilePlus,
-  Plus
+  Plus,
+  Tag,
+  ArrowLeft
 } from "./IconPack";
 
 const icons = {
@@ -31,7 +33,9 @@ const icons = {
   link: Link,
   save: Save,
   "file-plus": FilePlus,
-  plus: Plus
+  plus: Plus,
+  tag: Tag,
+  "arrow-left": ArrowLeft
 };
 
 const Icon = ({ id, color = "black", size, strokeWidth, ...delegated }) => {

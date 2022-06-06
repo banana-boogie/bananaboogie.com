@@ -2,16 +2,28 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 
+import { keywordsLabelled } from "@/contstants/mrt";
+import { createKeywordRegex } from "@/utils";
+
 import Icon from "@components/Icon";
 import Highlighter from "@components/Highlighter";
 import UnstyledButton from "@components/UnstyledButton";
-import Loading from "../Loading";
+import Loading from "@components/Loading";
+import CommentTags from "@components/CommentTags";
 
-const CommentCard = ({ data, name, projectId }) => {
+const CommentCard = ({ data, name, projectId, projectTags = [] }) => {
+  const initalTags = getInitialTags();
   const [clipboardCopied, setClipboardCopied] = React.useState({});
   const [commentSaved, setCommentSaved] = React.useState({});
-  const [disableSave, setDisableSave] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
+  const [savedTags, setSavedTags] = React.useState(
+    initalTags.filter((t) => t.checked).map((t) => ({ id: t.id }))
+  );
+  const [savedCommentId, setSavedCommentId] = React.useState("");
+
+  const highlightWords = Object.assign({}, keywordsLabelled, {
+    tag: projectTags.map((t) => t.name)
+  });
 
   async function copyToClipboard(data) {
     const { link, author, keywords, comment, postedAt } = data;
@@ -25,14 +37,30 @@ const CommentCard = ({ data, name, projectId }) => {
     setTimeout(setClipboardCopied.bind(null, {}), 1500);
   }
 
-  const getKeywords = () => {
+  function getKeywords() {
     return (data.keywords || [])
       .sort((a, b) => a.localeCompare(b))
       .map((k) => `${k[0].toUpperCase()}${k.slice(1)}`)
       .join(", ");
+  }
+
+  function getInitialTags() {
+    const tagRegex = createKeywordRegex(projectTags.map((t) => t.name));
+    const tagsFound = (data.comment.match(tagRegex) || []).map((t) =>
+      t.toLowerCase()
+    );
+
+    return projectTags.map((t) => {
+      t.checked = tagsFound.includes(t.name.toLowerCase());
+      return t;
+    });
+  }
+
+  const handleSelectedTags = (tags) => {
+    setSavedTags(tags);
   };
 
-  async function save() {
+  async function saveComment() {
     const { author, comment, keywords, link, subreddit } = data;
     const save = {
       author,
@@ -41,13 +69,18 @@ const CommentCard = ({ data, name, projectId }) => {
       keywords,
       projectId,
       subreddit,
+      tags: savedTags,
       postedAt: new Date(data.postedAt)
     };
-    setIsLoading(true);
-    await axios.post("/api/comments", save);
+    // setIsLoading(true);
+
+    const { data: savedComment } = savedCommentId
+      ? await axios.patch("/api/comments", { id: savedCommentId, ...save })
+      : await axios.post("/api/comments", save);
+
     setIsLoading(false);
-    setCommentSaved({ [name]: true });
-    setDisableSave({ [name]: true });
+    setCommentSaved({ [name]: true }); // used to display saved screen, will disappear after
+    setSavedCommentId(savedComment.id);
     setTimeout(setCommentSaved.bind(null, {}), 2500);
   }
 
@@ -71,21 +104,34 @@ const CommentCard = ({ data, name, projectId }) => {
             </CopyButton>
             {clipboardCopied[name] && <CopyTooltip>Copied!</CopyTooltip>}
           </CopyWrapper>
-          <SaveButton onClick={save} disabled={disableSave[name]}>
+          <SaveButton onClick={saveComment}>
             <Icon id="save" color="white" />
           </SaveButton>
+          <CommentTags
+            comment={data.comment}
+            tags={initalTags}
+            handleSelectedTags={handleSelectedTags}
+          />
         </ActionsWrapper>
       </Header>
       <Keywords>{getKeywords()}</Keywords>
-      <figure>
+      <TagsFound>
+        {initalTags
+          .filter((t) => t.checked)
+          .map((t) => t.name)
+          .sort((a, b) => a.localeCompare(b))
+          .map((k) => `${k[0].toUpperCase()}${k.slice(1)}`)
+          .join(", ")}
+      </TagsFound>
+      <CommentWrapper>
         <Comment>
-          <Highlighter words={data.comment} />
+          <Highlighter words={data.comment} highlightWords={highlightWords} />
         </Comment>
         <CommentCaption>
           <Author>{data.author}</Author>
           <DatePosted>{data.postedAt}</DatePosted>
         </CommentCaption>
-      </figure>
+      </CommentWrapper>
     </Wrapper>
   );
 };
@@ -96,6 +142,9 @@ const Wrapper = styled.div`
   padding: 16px;
   position: relative;
   isolation: isolate;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Backdrop = styled.div`
@@ -119,28 +168,10 @@ const LoadingWrapper = styled(Backdrop)``;
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-const Comment = styled.blockquote`
-  margin-bottom: 12px;
-  &::before {
-    content: "“";
-    font-size: 1.3rem;
-    margin-right: 4px;
-  }
-  &::after {
-    content: "”";
-    font-size: 1.3rem;
-    margin-left: 4px;
-  }
-`;
-const CommentCaption = styled.figcaption`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
+  margin-bottom: 24px;
 `;
 const Keywords = styled.p``;
+const TagsFound = styled.p``;
 
 const ThreadLink = styled.a`
   display: flex;
@@ -157,6 +188,7 @@ const ActionsWrapper = styled.div`
   display: flex;
   align-items: baseline;
   gap: 16px;
+  position: relative;
 `;
 
 const CopyWrapper = styled.div`
@@ -181,5 +213,33 @@ const CopyTooltip = styled.span`
 const CopyButton = styled(UnstyledButton)``;
 
 const SaveButton = styled(UnstyledButton)``;
+
+const CommentWrapper = styled.figure`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  & > * {
+    flex: 1;
+  }
+`;
+const Comment = styled.blockquote`
+  margin-bottom: 24px;
+  &::before {
+    content: "“";
+    font-size: 1.3rem;
+    margin-right: 4px;
+  }
+  &::after {
+    content: "”";
+    font-size: 1.3rem;
+    margin-left: 4px;
+  }
+`;
+const CommentCaption = styled.figcaption`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+`;
 
 export default CommentCard;

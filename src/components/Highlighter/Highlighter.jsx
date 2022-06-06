@@ -2,21 +2,31 @@ import React from "react";
 import styled from "styled-components";
 
 import { createKeywordRegex } from "@/utils";
-import { keywordsLabelled, keywords } from "@/contstants/mrt";
 
-const Highlighter = ({ words }) => {
+const Highlighter = ({ words, highlightWords }) => {
   let final = [];
 
+  const keywords = Object.values(highlightWords).flat();
+  const keywordCategories = Object.keys(highlightWords);
   const keywordRegex = createKeywordRegex(keywords);
 
+  // Change all the keywords to lower case
+  keywordCategories.forEach((category) => {
+    highlightWords[category] = highlightWords[category].map((w) =>
+      w.toLocaleLowerCase()
+    );
+  });
+
   words.split(" ").forEach((word, index) => {
-    const keywordMatch = word.match(keywordRegex);
-    if (keywordMatch) {
-      const isGoodWord = !!keywordsLabelled.good.find(
-        (e) => e.toLocaleLowerCase() === keywordMatch[0].toLocaleLowerCase()
-      );
+    if (word.match(keywordRegex)) {
+      const wordCategory = keywordCategories.find((category) => {
+        return highlightWords[category].includes(word.toLocaleLowerCase())
+          ? category
+          : null;
+      });
+
       final.push(
-        <Highlight key={index} isGood={isGoodWord}>
+        <Highlight key={index} category={wordCategory}>
           {word}
         </Highlight>
       );
@@ -34,8 +44,21 @@ const Highlight = styled.span`
   padding: 4px;
   margin: 2px;
   color: black;
-  background: ${(p) =>
-    p.isGood ? "hsl(69, 100%, 72%)" : "hsl(346, 84%, 61%)"};
+  background: ${({ category }) => {
+    let color = "";
+    switch (category) {
+      case "good":
+        color = "hsl(120, 84%, 80%)";
+        break;
+      case "bad":
+        color = "hsl(346, 84%, 61%)";
+        break;
+      case "tag":
+        color = "hsl(69, 100%, 72%)";
+        break;
+    }
+    return color;
+  }};
 `;
 
 export default Highlighter;

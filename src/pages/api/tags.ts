@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 
 type Data = {
   name: string;
+  projectId: string;
 };
 
 type Error = {
@@ -18,16 +19,16 @@ export default async function handler(
 ) {
   // Create new home
   if (req.method === "POST") {
-    const { name, tags } = req.body;
+    const { name } = req.body;
     try {
-      const saved = await prisma.project.create({
-        data: { name, tags }
+      const saved = await prisma.tags.create({
+        data: { name }
       });
 
       res.status(200).json(saved);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Error creating project." });
+      res.status(500).json({ message: "Error creating tag." });
     }
   }
   // HTTP method not supported!

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import UnstyledButton from "@components/UnstyledButton";
+import Icon from "@components/Icon";
 
 export default function Layout({ hideBackButton, children }) {
   const router = useRouter();
@@ -9,7 +10,7 @@ export default function Layout({ hideBackButton, children }) {
     <>
       <Header>
         <BackButton hide={hideBackButton} onClick={() => router.back()}>
-          Back
+          <Icon id="arrow-left" color="white" />
         </BackButton>
       </Header>
       <Main>{children}</Main>

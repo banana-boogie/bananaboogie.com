@@ -9,11 +9,18 @@ import TextInput from "@/components/TextInput";
 import UnstyledButton from "@/components/UnstyledButton";
 import VisuallyHidden from "@/components/VisuallyHidden";
 
+import { tags as DEFAULT_TAGS } from "@/contstants/mrt";
+
 const NewProjectModal = ({ isOpen, onDismiss }) => {
   const [projectName, setProjectName] = React.useState("");
 
   async function createProject() {
-    const response = await axios.post("/api/projects", { name: projectName });
+    const response = await axios.post("/api/projects", {
+      name: projectName,
+      tags: {
+        create: DEFAULT_TAGS
+      }
+    });
     const { data } = response;
 
     Router.push(`/mrt/projects/${data.id}`);
@@ -80,8 +87,8 @@ const CreateProjectButton = styled(UnstyledButton)`
   color: ${(p) => (p.disabled ? "hsl(0deg 0% 50% / 0.5)" : "black")};
   padding: 8px;
   border-radius: 4px;
-
   background: ${(p) => (p.disabled ? "hsl(0deg 0% 50% / 0.5)" : "white")};
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "inherit")};
 `;
 
 export default NewProjectModal;

@@ -7,10 +7,12 @@ type Data = {
   comment: string;
   keywords: string[];
   link: string;
-  tags: string[];
+  tags?: string[];
   projectId: string;
   subreddit: string | null;
   postedAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 type Error = {
@@ -21,20 +23,22 @@ const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data | Error>
+  res: NextApiResponse
 ) {
+  const {
+    id,
+    author,
+    comment,
+    link,
+    postedAt,
+    tags,
+    projectId,
+    keywords,
+    subreddit
+  } = req.body;
+
   // Create new home
   if (req.method === "POST") {
-    const {
-      author,
-      comment,
-      link,
-      postedAt,
-      tags,
-      projectId,
-      keywords,
-      subreddit
-    } = req.body;
     try {
       const saved = await prisma.comment.create({
         data: {
@@ -42,10 +46,18 @@ export default async function handler(
           comment,
           link,
           postedAt,
-          tags,
           projectId,
           keywords,
-          subreddit
+          subreddit,
+          tags: {
+            create: tags.map((t: { id: string }) => {
+              return {
+                tag: {
+                  connect: { id: t.id }
+                }
+              };
+            })
+          }
         }
       });
 
@@ -54,10 +66,29 @@ export default async function handler(
       console.error(error);
       res.status(500).json({ message: "Error saving comment" });
     }
+  } else if (req.method === "PATCH") {
+    try {
+      const update = await prisma.comment.update({
+        where: { id },
+        data: {
+          tags: {
+            deleteMany: {},
+            create: tags.map((t: { id: string }) => ({
+              tag: { connect: { id: t.id } }
+            }))
+          }
+        },
+        include: { tags: true }
+      });
+      res.status(200).json(update);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error updating comment" });
+    }
   }
   // HTTP method not supported!
   else {
-    res.setHeader("Allow", ["POST"]);
+    res.setHeader("Allow", ["POST", "PATCH"]);
     res
       .status(405)
       .json({ message: `HTTP method ${req.method} is not supported.` });
