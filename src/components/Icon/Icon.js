@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {
+  ArrowLeft,
   Search,
   Menu,
   ShoppingBag,
@@ -15,6 +16,7 @@ import {
 } from "./IconPack";
 
 const icons = {
+  "arrow-left": ArrowLeft,
   search: Search,
   menu: Menu,
   "shopping-bag": ShoppingBag,

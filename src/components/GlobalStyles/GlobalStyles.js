@@ -1,5 +1,12 @@
 import { createGlobalStyle } from "styled-components";
-import { COLORS, WEIGHTS } from "../../contstants/css";
+import {
+  COLORS,
+  WEIGHTS,
+  FONTS,
+  FONT_SIZES,
+  SPACING,
+  BORDER_RADIUS
+} from "../../contstants/css";
 
 const GlobalStyles = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -188,14 +195,53 @@ html {
     Silence the warning about missing Reach Dialog styles
   */
   --reach-dialog: 1;
+  
+  /* FONTS */
+  --font-family: ${FONTS.primary};
+
+  /* FONT SIZES */
+  --font-size-xxs: ${FONT_SIZES.xxs};
+  --font-size-xs: ${FONT_SIZES.xs};
+  --font-size-sm: ${FONT_SIZES.sm};
+  --font-size-md: ${FONT_SIZES.md};
+  --font-size-lg: ${FONT_SIZES.lg};
+  --font-size-xl: ${FONT_SIZES.xl};
+  --font-size-xxl: ${FONT_SIZES.xxl};
+
+  /* FONT WEIGHTS */
+  --font-weight-lightest: ${WEIGHTS.lightest};
+  --font-weight-light: ${WEIGHTS.light};
   --font-weight-normal: ${WEIGHTS.normal};
   --font-weight-medium: ${WEIGHTS.medium};
+  --font-weight-semibold: ${WEIGHTS.semiBold};
   --font-weight-bold: ${WEIGHTS.bold};
+
+  /* SPACING */
+  --space-xxs: ${SPACING.xxs};
+  --space-xs: ${SPACING.xs};
+  --space-sm: ${SPACING.sm};
+  --space-md: ${SPACING.md};
+  --space-lg: ${SPACING.lg};
+  --space-xl: ${SPACING.xl};
+  --space-xxl: ${SPACING.xxl};
+
+  /* BORDER-RADIUS */
+  --border-radius-xxs: ${BORDER_RADIUS.xxs};
+  --border-radius-xs: ${BORDER_RADIUS.xs};
+  --border-radius-sm: ${BORDER_RADIUS.sm};
+  --border-radius-md: ${BORDER_RADIUS.md};
+  --border-radius-lg: ${BORDER_RADIUS.lg};
+  --border-radius-xl: ${BORDER_RADIUS.xl};
+  --border-radius-xxl: ${BORDER_RADIUS.xxl};
+
+
+  /* COLORS */
   --color-background: hsl(${COLORS.black});
   --color-text: hsl(${COLORS.white});
   --color-white: hsl(${COLORS.white});
   --color-primary: hsl(${COLORS.primary});
   --color-secondary: hsl(${COLORS.secondary});
+  --color-accent: hsl(${COLORS.accent});
   --color-gray-100: hsl(${COLORS.gray[100]});
   --color-gray-300: hsl(${COLORS.gray[300]});
   --color-gray-500: hsl(${COLORS.gray[500]});

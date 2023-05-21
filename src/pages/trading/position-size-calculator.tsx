@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import type { NextPage } from "next";
 import styled from "styled-components";
 
-import useInput from "../hooks/useInput.hook";
+import Layout from "@/components/Layout/Layout";
+import useInput from "../../hooks/useInput.hook";
 
 const PositionSizeCalculator: NextPage = () => {
   const portfolioProps = useInput(50000);
@@ -44,7 +45,7 @@ const PositionSizeCalculator: NextPage = () => {
   };
 
   return (
-    <Wrapper>
+    <Layout>
       <Title>Postition Size Calculator</Title>
       <PortfolioSizeLabel>
         Portfolio Size
@@ -115,11 +116,9 @@ const PositionSizeCalculator: NextPage = () => {
           })}
         </RiskScenarioWrapper>
       </Summary>
-    </Wrapper>
+    </Layout>
   );
 };
-
-const Wrapper = styled.div``;
 
 const Title = styled.h1`
   font-size: 2.5rem;

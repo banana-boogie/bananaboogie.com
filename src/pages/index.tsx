@@ -9,8 +9,8 @@ const Home: NextPage = () => {
     <Wrapper>
       <Title>Banana Boogie</Title>
       <NavWrapper>
-        <Link href="/position-size-calculator" passHref>
-          <NavLinkText>Position Size Calculator</NavLinkText>
+        <Link href="/trading" passHref>
+          <NavLinkText>Trading Co.</NavLinkText>
         </Link>
         <Link href="/mrt" passHref>
           <NavLinkText>M.R.T.</NavLinkText>

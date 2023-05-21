@@ -1,3 +1,4 @@
+export { default as ArrowLeft } from "./arrow-left";
 export { default as ChevronDown } from "./chevron-down";
 export { default as Copy } from "./copy";
 export { default as Facebook } from "./facebook";

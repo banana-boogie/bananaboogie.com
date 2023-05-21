@@ -20,20 +20,67 @@ export const COLORS = {
     900: "43deg 100% 33%"
   },
   gray: {
-    100: "185deg 5% 95%",
-    300: "190deg 5% 80%",
+    100: "0deg 0% 30%)",
+    300: "0deg 0% 80%",
     500: "196deg 4% 60%",
     700: "220deg 5% 40%",
     900: "220deg 3% 20%"
   },
-  primary: "340deg 65% 47%",
-  secondary: "240deg 60% 63%"
+  orange: {
+    300: "28deg 75% 71%"
+  },
+  primary: "207deg, 100%, 49%",
+  secondary: "240deg 60% 63%",
+  accent: "28deg 75% 71%",
+  background: {
+    success: "158deg 67% 95%",
+    info: "187deg 86% 95%",
+    warning: "43deg 100% 96%",
+    error: "353deg 80% 96%"
+  }
+};
+
+export const FONTS = {
+  primary: "Open Sans, sans-serif"
+};
+
+export const FONT_SIZES = {
+  xxs: "8px",
+  xs: "12px",
+  sm: "14px",
+  md: "16px",
+  lg: "24px",
+  xl: "32px",
+  xxl: "48px"
 };
 
 export const WEIGHTS = {
+  lightest: 300,
+  light: 400,
   normal: 500,
   medium: 600,
+  semiBold: 700,
   bold: 800
+};
+
+export const SPACING = {
+  xxs: "4px",
+  xs: "8px",
+  sm: "12px",
+  md: "16px",
+  lg: "24px",
+  xl: "32px",
+  xxl: "48px"
+};
+
+export const BORDER_RADIUS = {
+  xxs: "4px",
+  xs: "8px",
+  sm: "12px",
+  md: "16px",
+  lg: "24px",
+  xl: "32px",
+  xxl: "48px"
 };
 
 export const BREAKPOINTS = {
@@ -43,7 +90,5 @@ export const BREAKPOINTS = {
 };
 
 export const QUERIES = {
-  phoneAndSmaller: `max-width: ${BREAKPOINTS.phone / 16}rem`,
-  tabletAndSmaller: `max-width: ${BREAKPOINTS.tablet / 16}rem`,
-  laptopAndSmaller: `max-width: ${BREAKPOINTS.laptop / 16}rem`
+  tabletAndBigger: `min-width: ${BREAKPOINTS.tablet / 16}rem`
 };
