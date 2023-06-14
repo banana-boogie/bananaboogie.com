@@ -1,44 +1,37 @@
 import React from "react";
-import Link from "next/link";
+import type { NextPage } from "next";
 import styled from "styled-components";
 
-import type { NextPage } from "next";
+import Header from "@/components/Header";
 
 const Home: NextPage = () => {
   return (
     <Wrapper>
-      <Title>Banana Boogie</Title>
-      <NavWrapper>
-        <Link href="/trading" passHref>
-          <NavLinkText>Trading Co.</NavLinkText>
-        </Link>
-        <Link href="/mrt" passHref>
-          <NavLinkText>M.R.T.</NavLinkText>
-        </Link>
-      </NavWrapper>
+      <Header />
+      <TextWrapper>
+        <Title>
+          Hello <br /> Banana
+        </Title>
+      </TextWrapper>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  max-width: 600px;
+  max-width: 670px;
   margin: 0 auto;
+  height: 100%;
+`;
+
+const TextWrapper = styled.div`
+  display: grid;
+  place-content: center;
+  height: 70vh; /* Adjust the height as needed */
 `;
 
 const Title = styled.h1`
   font-size: 2.5rem;
-`;
-
-const NavWrapper = styled.nav`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;
-
-const NavLinkText = styled.a`
-  color: yellow;
-  text-decoration: none;
-  font-size: 1.125rem;
+  text-align: center;
 `;
 
 export default Home;

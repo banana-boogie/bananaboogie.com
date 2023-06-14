@@ -217,6 +217,7 @@ html {
   --font-weight-bold: ${WEIGHTS.bold};
 
   /* SPACING */
+  --space-xxxs: ${SPACING.xxxs};
   --space-xxs: ${SPACING.xxs};
   --space-xs: ${SPACING.xs};
   --space-sm: ${SPACING.sm};
@@ -266,7 +267,7 @@ html {
 
 
 /** Third Party Overrides */
- #___gatsby, #gatsby-focus-wrapper {
+#__next {
    height: 100%;
  }
 `;

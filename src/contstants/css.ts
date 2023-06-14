@@ -64,13 +64,14 @@ export const WEIGHTS = {
 };
 
 export const SPACING = {
-  xxs: "4px",
-  xs: "8px",
-  sm: "12px",
-  md: "16px",
-  lg: "24px",
-  xl: "32px",
-  xxl: "48px"
+  xxxs: "4px",
+  xxs: "8px",
+  xsm: "12px",
+  sm: "16px",
+  md: "24px",
+  lg: "32px",
+  xl: "48px",
+  xxl: "64px"
 };
 
 export const BORDER_RADIUS = {
