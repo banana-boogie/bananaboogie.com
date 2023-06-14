@@ -2,10 +2,11 @@ import * as React from "react";
 import styled from "styled-components";
 import Layout from "@components/Layout";
 import NextLink from "next/link";
+import { QUERIES } from "@/contstants";
 
 const MRT = () => {
   return (
-    <Layout hideBackButton={true}>
+    <Layout hideBackButton={false}>
       <Wrapper>
         <Title>Trading Co.</Title>
         <LinkWrapper>
@@ -25,26 +26,35 @@ const MRT = () => {
 };
 
 const Wrapper = styled.div`
-  min-height: 100%;
-  margin-bottom: 250px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-sm);
+
+  @media ${QUERIES.tabletAndBigger} {
+    max-width: 1200px;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 4rem;
-  margin-bottom: 36px;
+  color: var(--color-title);
+  text-align: center;
+  line-height: 1;
+  font-size: calc(12px + var(--font-size-xxl));
+  font-family: var(--font-family-heading);
+
+  margin-bottom: var(--space-md);
 `;
 
 const LinkWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
+
+  padding: 0px var(--space-md);
 `;
 
 const LinkText = styled.a`
-  color: yellow;
+  color: var(--color-text);
   text-decoration: none;
   font-size: 1.5rem;
 

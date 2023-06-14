@@ -32,7 +32,9 @@ export const COLORS = {
   primary: "207deg, 100%, 49%",
   secondary: "240deg 60% 63%",
   accent: "28deg 75% 71%",
-  background: {
+  title: "54deg 33% 25%",
+  background: "65deg 79% 74%",
+  backgroundAlert: {
     success: "158deg 67% 95%",
     info: "187deg 86% 95%",
     warning: "43deg 100% 96%",
@@ -41,7 +43,11 @@ export const COLORS = {
 };
 
 export const FONTS = {
-  primary: "Open Sans, sans-serif"
+  primary: "Open Sans, sans-serif",
+  heading:
+    "Lilita One, Noto Sans Canadian Aboriginal Variable, Open Sans, sans-serif",
+  subheading:
+    "Noto Sans Canadian Aboriginal Variable, Lilita One, Open Sans, sans-serif"
 };
 
 export const FONT_SIZES = {
@@ -51,7 +57,8 @@ export const FONT_SIZES = {
   md: "16px",
   lg: "24px",
   xl: "32px",
-  xxl: "48px"
+  xxl: "48px",
+  xxxl: "64px"
 };
 
 export const WEIGHTS = {
@@ -64,13 +71,14 @@ export const WEIGHTS = {
 };
 
 export const SPACING = {
-  xxs: "4px",
-  xs: "8px",
-  sm: "12px",
-  md: "16px",
-  lg: "24px",
-  xl: "32px",
-  xxl: "48px"
+  xxxs: "4px",
+  xxs: "8px",
+  xsm: "12px",
+  sm: "16px",
+  md: "24px",
+  lg: "32px",
+  xl: "48px",
+  xxl: "64px"
 };
 
 export const BORDER_RADIUS = {
@@ -85,10 +93,10 @@ export const BORDER_RADIUS = {
 
 export const BREAKPOINTS = {
   phone: 600,
-  tablet: 950,
+  tablet: 810,
   laptop: 1300
 };
 
 export const QUERIES = {
-  tabletAndBigger: `min-width: ${BREAKPOINTS.tablet / 16}rem`
+  tabletAndBigger: `(min-width: ${BREAKPOINTS.tablet / 16}rem)`
 };

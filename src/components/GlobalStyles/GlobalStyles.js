@@ -198,6 +198,8 @@ html {
   
   /* FONTS */
   --font-family: ${FONTS.primary};
+  --font-family-heading: ${FONTS.heading};
+  --font-family-subheading: ${FONTS.subheading};
 
   /* FONT SIZES */
   --font-size-xxs: ${FONT_SIZES.xxs};
@@ -207,6 +209,7 @@ html {
   --font-size-lg: ${FONT_SIZES.lg};
   --font-size-xl: ${FONT_SIZES.xl};
   --font-size-xxl: ${FONT_SIZES.xxl};
+  --font-size-xxxl: ${FONT_SIZES.xxxl};
 
   /* FONT WEIGHTS */
   --font-weight-lightest: ${WEIGHTS.lightest};
@@ -217,6 +220,7 @@ html {
   --font-weight-bold: ${WEIGHTS.bold};
 
   /* SPACING */
+  --space-xxxs: ${SPACING.xxxs};
   --space-xxs: ${SPACING.xxs};
   --space-xs: ${SPACING.xs};
   --space-sm: ${SPACING.sm};
@@ -236,8 +240,9 @@ html {
 
 
   /* COLORS */
-  --color-background: hsl(${COLORS.black});
-  --color-text: hsl(${COLORS.white});
+  --color-title: hsl(${COLORS.title});
+  --color-background: hsl(${COLORS.background});
+  --color-text: hsl(${COLORS.gray[900]});
   --color-white: hsl(${COLORS.white});
   --color-primary: hsl(${COLORS.primary});
   --color-secondary: hsl(${COLORS.secondary});
@@ -266,7 +271,7 @@ html {
 
 
 /** Third Party Overrides */
- #___gatsby, #gatsby-focus-wrapper {
+#__next {
    height: 100%;
  }
 `;

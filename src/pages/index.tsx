@@ -1,44 +1,90 @@
 import React from "react";
-import Link from "next/link";
+import type { NextPage } from "next";
 import styled from "styled-components";
 
-import type { NextPage } from "next";
+import Header from "@/components/Header";
+import { QUERIES } from "@/contstants";
 
 const Home: NextPage = () => {
   return (
     <Wrapper>
-      <Title>Banana Boogie</Title>
-      <NavWrapper>
-        <Link href="/trading" passHref>
-          <NavLinkText>Trading Co.</NavLinkText>
-        </Link>
-        <Link href="/mrt" passHref>
-          <NavLinkText>M.R.T.</NavLinkText>
-        </Link>
-      </NavWrapper>
+      <Header hideBackButton={true} />
+      <Main>
+        <Title>
+          HELLO <br /> BANANA
+        </Title>
+        <ImageContainer>
+          <BananaImage
+            src="/banana.svg"
+            alt="picture of a digitally drawn banana"
+          />
+        </ImageContainer>
+      </Main>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  max-width: 600px;
   margin: 0 auto;
+  height: 100%;
+
+  @media ${QUERIES.tabletAndBigger} {
+    max-width: 1200px;
+  }
+`;
+
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+
+  @media ${QUERIES.tabletAndBigger} {
+    flex-direction: revert;
+    justify-content: revert;
+
+    display: grid;
+    place-content: center;
+    position: relative;
+    height: 70vh;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 2.5rem;
+  color: var(--color-title);
+  text-align: center;
+  line-height: 0.3;
+  font-size: calc(12px + var(--font-size-xxl));
+  font-family: var(--font-family-heading);
+
+  @media ${QUERIES.tabletAndBigger} {
+    font-size: var(--font-size-xxxl);
+  }
 `;
 
-const NavWrapper = styled.nav`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+const ImageContainer = styled.div`
+  position: relative;
 `;
 
-const NavLinkText = styled.a`
-  color: yellow;
-  text-decoration: none;
-  font-size: 1.125rem;
+const BananaImage = styled.img`
+  transform: rotate(21deg);
+  --image-size: 188px;
+  height: var(--image-size);
+  width: var(--image-size);
+  margin-top: var(--space-lg);
+  margin-left: var(--space-xl);
+
+  @media ${QUERIES.tabletAndBigger} {
+    position: absolute;
+    bottom: -188px;
+    right: -173px;
+    transform: rotate(6deg);
+
+    --image-size: 236px
+    height: var(--image-size);
+    width: var(--image-size);
+  }
 `;
 
 export default Home;

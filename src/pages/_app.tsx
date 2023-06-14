@@ -2,12 +2,11 @@ import styled from "styled-components";
 import type { AppProps } from "next/app";
 import GlobalStyles from "@components/GlobalStyles";
 
-import "@fontsource/open-sans/300.css";
-import "@fontsource/open-sans/400.css";
-import "@fontsource/open-sans/500.css";
-import "@fontsource/open-sans/600.css";
-import "@fontsource/open-sans/700.css";
-import "@fontsource/open-sans/800.css";
+// Supports weights 100-900
+import "@fontsource/open-sans";
+import "@fontsource-variable/noto-sans-canadian-aboriginal";
+
+import "@fontsource/lilita-one";
 
 function BananaSite({ Component, pageProps }: AppProps) {
   return (
@@ -18,6 +17,8 @@ function BananaSite({ Component, pageProps }: AppProps) {
   );
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 100%;
+`;
 
 export default BananaSite;
