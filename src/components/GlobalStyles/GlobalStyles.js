@@ -209,7 +209,7 @@ html {
   --font-size-lg: ${FONT_SIZES.lg};
   --font-size-xl: ${FONT_SIZES.xl};
   --font-size-xxl: ${FONT_SIZES.xxl};
-  --font-size-display: ${FONT_SIZES.display};
+  --font-size-xxxl: ${FONT_SIZES.xxxl};
 
   /* FONT WEIGHTS */
   --font-weight-lightest: ${WEIGHTS.lightest};

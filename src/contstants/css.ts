@@ -58,7 +58,7 @@ export const FONT_SIZES = {
   lg: "24px",
   xl: "32px",
   xxl: "48px",
-  display: "72px"
+  xxxl: "64px"
 };
 
 export const WEIGHTS = {
