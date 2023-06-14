@@ -32,7 +32,9 @@ export const COLORS = {
   primary: "207deg, 100%, 49%",
   secondary: "240deg 60% 63%",
   accent: "28deg 75% 71%",
-  background: {
+  title: "54deg 33% 25%",
+  background: "65deg 79% 74%",
+  backgroundAlert: {
     success: "158deg 67% 95%",
     info: "187deg 86% 95%",
     warning: "43deg 100% 96%",
@@ -41,7 +43,11 @@ export const COLORS = {
 };
 
 export const FONTS = {
-  primary: "Open Sans, sans-serif"
+  primary: "Open Sans, sans-serif",
+  heading:
+    "Lilita One, Noto Sans Canadian Aboriginal Variable, Open Sans, sans-serif",
+  subheading:
+    "Noto Sans Canadian Aboriginal Variable, Lilita One, Open Sans, sans-serif"
 };
 
 export const FONT_SIZES = {
@@ -51,7 +57,8 @@ export const FONT_SIZES = {
   md: "16px",
   lg: "24px",
   xl: "32px",
-  xxl: "48px"
+  xxl: "48px",
+  display: "72px"
 };
 
 export const WEIGHTS = {

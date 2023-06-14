@@ -198,6 +198,8 @@ html {
   
   /* FONTS */
   --font-family: ${FONTS.primary};
+  --font-family-heading: ${FONTS.heading};
+  --font-family-subheading: ${FONTS.subheading};
 
   /* FONT SIZES */
   --font-size-xxs: ${FONT_SIZES.xxs};
@@ -207,6 +209,7 @@ html {
   --font-size-lg: ${FONT_SIZES.lg};
   --font-size-xl: ${FONT_SIZES.xl};
   --font-size-xxl: ${FONT_SIZES.xxl};
+  --font-size-display: ${FONT_SIZES.display};
 
   /* FONT WEIGHTS */
   --font-weight-lightest: ${WEIGHTS.lightest};
@@ -237,7 +240,8 @@ html {
 
 
   /* COLORS */
-  --color-background: hsl(${COLORS.black});
+  --color-title: hsl(${COLORS.title});
+  --color-background: hsl(${COLORS.background});
   --color-text: hsl(${COLORS.white});
   --color-white: hsl(${COLORS.white});
   --color-primary: hsl(${COLORS.primary});

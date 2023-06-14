@@ -10,7 +10,7 @@ const Home: NextPage = () => {
       <Header />
       <TextWrapper>
         <Title>
-          Hello <br /> Banana
+          HELLO <br /> BANANA
         </Title>
       </TextWrapper>
     </Wrapper>
@@ -18,7 +18,6 @@ const Home: NextPage = () => {
 };
 
 const Wrapper = styled.div`
-  max-width: 670px;
   margin: 0 auto;
   height: 100%;
 `;
@@ -30,8 +29,11 @@ const TextWrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 2.5rem;
   text-align: center;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-display);
+  color: var(--color-title);
+  line-height: 0.3;
 `;
 
 export default Home;

@@ -20,7 +20,7 @@ const Header = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: right;
-  padding: var(--space-lg) 0px;
+  padding: var(--space-lg) var(--space-xxl);
 `;
 
 const NavWrapper = styled.nav`
@@ -29,9 +29,10 @@ const NavWrapper = styled.nav`
 `;
 
 const NavLinkText = styled.a`
-  color: yellow;
+  color: var(--color-title);
   text-decoration: none;
-  font-size: 1.125rem;
+  font-size: calc(4px + var(--font-size-md));
+  font-family: var(--font-family-subheading);
 `;
 
 export default Header;
