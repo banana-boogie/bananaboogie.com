@@ -4,6 +4,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 import Header from "@/components/Header";
+import { QUERIES } from "@/contstants";
 
 const Home: NextPage = () => {
   return (
@@ -27,22 +28,40 @@ const Home: NextPage = () => {
 const Wrapper = styled.div`
   margin: 0 auto;
   height: 100%;
-  max-width: 1200px;
+
+  @media ${QUERIES.tabletAndBigger} {
+    max-width: 1200px;
+  }
 `;
 
 const Main = styled.main`
-  display: grid;
-  place-content: center;
-  position: relative;
-  height: 70vh; /* Adjust the height as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+
+  @media ${QUERIES.tabletAndBigger} {
+    flex-direction: revert;
+    justify-content: revert;
+
+    display: grid;
+    place-content: center;
+    position: relative;
+    height: 70vh;
+  }
 `;
 
 const Title = styled.h1`
-  text-align: center;
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-xxxl);
   color: var(--color-title);
+  text-align: center;
   line-height: 0.3;
+  font-size: calc(12px + var(--font-size-xxl));
+  font-family: var(--font-family-heading);
+
+  @media ${QUERIES.tabletAndBigger} {
+    font-size: var(--font-size-xxxl);
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -50,13 +69,23 @@ const ImageContainer = styled.div`
 `;
 
 const BananaImage = styled.img`
-  position: absolute;
-  bottom: -188px;
-  right: -173px;
-  transform: rotate(6deg);
-  --image-size: 236px
+  transform: rotate(21deg);
+  --image-size: 188px;
   height: var(--image-size);
   width: var(--image-size);
+  margin-top: var(--space-lg);
+  margin-left: var(--space-xl);
+
+  @media ${QUERIES.tabletAndBigger} {
+    position: absolute;
+    bottom: -188px;
+    right: -173px;
+    transform: rotate(6deg);
+
+    --image-size: 236px
+    height: var(--image-size);
+    width: var(--image-size);
+  }
 `;
 
 export default Home;

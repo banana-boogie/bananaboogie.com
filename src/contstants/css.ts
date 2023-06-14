@@ -93,10 +93,10 @@ export const BORDER_RADIUS = {
 
 export const BREAKPOINTS = {
   phone: 600,
-  tablet: 950,
+  tablet: 810,
   laptop: 1300
 };
 
 export const QUERIES = {
-  tabletAndBigger: `min-width: ${BREAKPOINTS.tablet / 16}rem`
+  tabletAndBigger: `(min-width: ${BREAKPOINTS.tablet / 16}rem)`
 };
