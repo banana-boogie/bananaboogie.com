@@ -1,36 +1,24 @@
 import styled from "styled-components";
-import { useRouter } from "next/router";
-import UnstyledButton from "@components/UnstyledButton";
-import Icon from "@components/Icon";
+
+import Header from "@components/Header";
+import { QUERIES } from "@/contstants";
 
 export default function Layout({ hideBackButton = false, children }) {
-  const router = useRouter();
-
   return (
-    <>
-      <Header>
-        <BackButton hide={hideBackButton} onClick={() => router.back()}>
-          <Icon id="arrow-left" color="white" />
-        </BackButton>
-      </Header>
+    <Wrapper>
+      <Header hideBackButton={hideBackButton} />
       <Main>{children}</Main>
       <footer />
-    </>
+    </Wrapper>
   );
 }
 
-const Header = styled.header`
-  min-height: 128px;
+const Wrapper = styled.div`
+  margin: auto;
+  @media ${QUERIES.tabletAndBigger} {
+    max-width: 1200px;
+  }
 `;
-
-const BackButton = styled(UnstyledButton)`
-  display: ${({ hide }) => (hide ? "none" : "block")};
-  color: white;
-  font-size: 1.5rem;
-  text-decoration: none;
-  margin: 32px;
-`;
-
 const Main = styled.div`
   flex: 1;
   width: clamp(500px, 65%, 700px);

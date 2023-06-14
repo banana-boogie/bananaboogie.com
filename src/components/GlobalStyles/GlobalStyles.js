@@ -242,7 +242,7 @@ html {
   /* COLORS */
   --color-title: hsl(${COLORS.title});
   --color-background: hsl(${COLORS.background});
-  --color-text: hsl(${COLORS.white});
+  --color-text: hsl(${COLORS.gray[900]});
   --color-white: hsl(${COLORS.white});
   --color-primary: hsl(${COLORS.primary});
   --color-secondary: hsl(${COLORS.secondary});

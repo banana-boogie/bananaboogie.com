@@ -1,6 +1,5 @@
 import React from "react";
 import type { NextPage } from "next";
-import Image from "next/image";
 import styled from "styled-components";
 
 import Header from "@/components/Header";
@@ -9,7 +8,7 @@ import { QUERIES } from "@/contstants";
 const Home: NextPage = () => {
   return (
     <Wrapper>
-      <Header />
+      <Header hideBackButton={true} />
       <Main>
         <Title>
           HELLO <br /> BANANA
