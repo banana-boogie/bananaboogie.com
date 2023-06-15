@@ -34,18 +34,11 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-content: center;
   height: 90vh;
 
   @media ${QUERIES.tabletAndBigger} {
-    flex-direction: revert;
-    justify-content: revert;
-
-    display: grid;
-    place-content: center;
     position: relative;
     height: 70vh;
   }
@@ -54,7 +47,7 @@ const Main = styled.main`
 const Title = styled.h1`
   color: var(--color-title);
   text-align: center;
-  line-height: 0.3;
+  line-height: 1;
   font-size: calc(12px + var(--font-size-xxl));
   font-family: var(--font-family-heading);
 
@@ -68,22 +61,23 @@ const ImageContainer = styled.div`
 `;
 
 const BananaImage = styled.img`
-  transform: rotate(21deg);
   --image-size: 188px;
   height: var(--image-size);
   width: var(--image-size);
-  margin-top: var(--space-lg);
-  margin-left: var(--space-xl);
+  
+  position: absolute;
+  bottom: -149px;
+  right: -68px;
+  transform: rotate(33deg);
 
-  @media ${QUERIES.tabletAndBigger} {
-    position: absolute;
-    bottom: -188px;
-    right: -173px;
-    transform: rotate(6deg);
-
+  @media ${QUERIES.tabletAndBigger} {    
     --image-size: 236px
     height: var(--image-size);
     width: var(--image-size);
+
+    bottom: -188px;
+    right: -173px;
+    transform: rotate(6deg);
   }
 `;
 
