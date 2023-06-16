@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Layout from "@/components/Layout/Layout";
 import useInput from "../../hooks/useInput.hook";
+import { QUERIES } from "@/contstants";
 
 const PositionSizeCalculator: NextPage = () => {
   const portfolioProps = useInput(50000);
@@ -48,14 +49,10 @@ const PositionSizeCalculator: NextPage = () => {
     <Layout>
       <Title>Postition Size Calculator</Title>
       <PortfolioSizeLabel>
-        Portfolio Size
+        <LabelText>Portfolio Size</LabelText>
         <Input {...portfolioProps} placeholder="50000" />
       </PortfolioSizeLabel>
       <TradeWrapper>
-        <Label>
-          Ticker Symbol
-          <Input placeholder="TLT" />
-        </Label>
         <TradeTypeWrapper>
           <Label>
             Long
@@ -77,11 +74,15 @@ const PositionSizeCalculator: NextPage = () => {
           </Label>
         </TradeTypeWrapper>
         <Label>
-          Share Price
+          <LabelText>Ticker Symbol</LabelText>
+          <Input placeholder="TLT" />
+        </Label>
+        <Label>
+          <LabelText>Share Price</LabelText>
           <Input {...sharePriceProps} placeholder="10" />
         </Label>
         <Label>
-          Portfolio Risk
+          <LabelText>Portfolio Risk</LabelText>
           <Input {...portfolioRiskProps} placeholder="3" />
         </Label>
       </TradeWrapper>
@@ -133,7 +134,18 @@ const TradeWrapper = styled.div`
 
 const Label = styled.label`
   display: flex;
+  justify-content: space-between;
   gap: 12px;
+
+  @media ${QUERIES.tabletAndBigger} {
+    justify-content: revert;
+  }
+`;
+
+const LabelText = styled.span`
+  @media ${QUERIES.tabletAndBigger} {
+    min-width: 120px;
+  }
 `;
 
 const PortfolioSizeLabel = styled(Label)`

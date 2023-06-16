@@ -15,13 +15,22 @@ const Blog: NextPage = () => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: clamp(500px, 65%, 700px);
+  max-width: 100%;
+  padding: 0 var(--space-md);
+  margin: 0 auto;
+  @media ${QUERIES.tabletAndBigger} {
+    padding: 0;
+    width: clamp(500px, 65%, 1200px);
+  }
+`;
 
 const Title = styled.h1`
   color: var(--color-title);
-  text-align: center;
+  text-align: left;
   line-height: 1;
-  font-size: calc(12px + var(--font-size-xxl));
+  font-size: calc(12px + var(--font-size-xl));
   font-family: var(--font-family-heading);
 
   @media ${QUERIES.tabletAndBigger} {

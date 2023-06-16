@@ -6,7 +6,7 @@ import { QUERIES } from "@/contstants";
 
 const MRT = () => {
   return (
-    <Layout hideBackButton={false}>
+    <Layout hideHomeButton={false}>
       <Wrapper>
         <Title>Trading Co.</Title>
         <LinkWrapper>
@@ -29,6 +29,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+
+  width: clamp(500px, 65%, 700px);
+  max-width: 100%;
+  margin: 0 auto;
 
   @media ${QUERIES.tabletAndBigger} {
     max-width: 1200px;

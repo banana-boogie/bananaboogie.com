@@ -8,7 +8,7 @@ import { QUERIES } from "@/contstants";
 const Home: NextPage = () => {
   return (
     <Wrapper>
-      <Header hideBackButton={true} />
+      <Header hideHomeButton={true} />
       <Main>
         <Title>
           HELLO <br /> BANANA

@@ -5,18 +5,20 @@ import styled from "styled-components";
 
 import { QUERIES } from "@/contstants";
 
-import Icon from "@components/Icon";
 import UnstyledButton from "@components/UnstyledButton";
 
-const Header = ({ hideBackButton = false }) => {
+const Header = ({ hideHomeButton = false }) => {
   const router = useRouter();
   return (
     <Wrapper>
-      {hideBackButton ? (
+      {hideHomeButton ? (
         <Spacer />
       ) : (
-        <BackButton hide={hideBackButton} onClick={() => router.back()}>
-          <Icon id="arrow-left" color="black" />
+        <BackButton hide={hideHomeButton} onClick={() => router.push("/")}>
+          <BananaImage
+            src="/banana.svg"
+            alt="picture of a digitally drawn banana"
+          />
         </BackButton>
       )}
       <NavWrapper>
@@ -49,9 +51,34 @@ const Spacer = styled.div`
 `;
 
 const BackButton = styled(UnstyledButton)`
+  --image-size: 50px;
+
   display: ${({ hide }) => (hide ? "none" : "block")};
-  font-size: 1.5rem;
-  text-decoration: none;
+  position: relative;
+  height: var(--image-size);
+  width: var(--image-size);
+`;
+
+const BananaImage = styled.img`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--image-size);
+  width: var(--image-size);
+  transform: rotate(12deg);
+
+  filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.3));
+  transition: filter 0.3s ease-in-out;
+
+  &:hover {
+    filter: drop-shadow(0 0 20px purple) brightness(110%);
+    transform: scale(1.1);
+  }
+
+  @media ${QUERIES.tabletAndBigger} {
+  }
 `;
 
 const NavWrapper = styled.nav`

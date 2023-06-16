@@ -105,9 +105,13 @@ const PortfolioSizeLabel = styled(Label)`
   margin-bottom: 8px;
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+  max-width: 50%;
+`;
 const PercentInput = styled.input`
   position: relative;
+  max-width: 50%;
+
   ::after {
     content: "%";
     position: absolute;

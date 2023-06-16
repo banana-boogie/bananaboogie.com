@@ -64,7 +64,12 @@ const SharesToBuyCalculator: NextPage = () => {
       <Label>
         <LabelText>% Risk</LabelText>
         <PercentInput {...riskPercentageInput} placeholder="0" />
-        <h3>${formatNumberWithCommas(calculatePortfolioRiskValue())}</h3>
+        <RiskValue>
+          Amount at Risk: $
+          <span style={{ fontWeight: 600 }}>
+            {formatNumberWithCommas(calculatePortfolioRiskValue())}
+          </span>
+        </RiskValue>
       </Label>
       <TradeWrapper>
         <Label>
@@ -107,6 +112,7 @@ const TradeWrapper = styled.div`
 
 const Label = styled.label`
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
 `;
 
@@ -114,8 +120,15 @@ const PortfolioSizeLabel = styled(Label)`
   margin-bottom: 8px;
 `;
 
-const Input = styled.input``;
+const RiskValue = styled.span`
+  flex-basis: 100%;
+`;
+
+const Input = styled.input`
+  max-width: 50%;
+`;
 const PercentInput = styled.input`
+  max-width: 50%;
   position: relative;
   ::after {
     content: "%";
