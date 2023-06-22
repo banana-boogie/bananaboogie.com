@@ -1,17 +1,6 @@
 export const COLORS = {
   black: "0 0% 12%",
   white: "0deg 0% 100%",
-  blue: {
-    100: "190deg 77% 88%",
-    200: "190deg 76% 82%",
-    300: "189deg 75% 75%",
-    400: "190deg 74% 59%",
-    500: "190deg, 100%, 42%",
-    600: "195deg, 100%, 39%",
-    700: "201deg, 100%, 36%",
-    800: "214deg, 97%, 27%",
-    900: "239deg, 94%, 19%"
-  },
   yellow: {
     100: "55deg 100% 50%",
     300: "52deg 100% 50%",
@@ -26,13 +15,13 @@ export const COLORS = {
     700: "220deg 5% 40%",
     900: "220deg 3% 20%"
   },
-  orange: {
-    300: "28deg 75% 71%"
+  font: {
+    primary: "54deg 33% 25%"
   },
+
   primary: "207deg, 100%, 49%",
   secondary: "240deg 60% 63%",
   accent: "28deg 75% 71%",
-  title: "54deg 33% 25%",
   background: "65deg 79% 74%",
   backgroundAlert: {
     success: "158deg 67% 95%",

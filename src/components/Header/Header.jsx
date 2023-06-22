@@ -96,9 +96,12 @@ const NavWrapper = styled.nav`
 `;
 
 const NavLinkText = styled.a`
-  color: var(--color-title);
-  font-family: var(--font-family-subheading);
+  color: var(--color-font-primary);
   text-decoration: none;
+  text-align: center;
+  font-size: var(--font-size-md);
+  font-family: var(--font-family-subheading);
+  line-height: 100%;
 
   @media ${QUERIES.tabletAndBigger} {
     font-size: calc(4px + var(--font-size-md));
