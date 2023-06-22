@@ -56,47 +56,53 @@ const SharesToBuyCalculator: NextPage = () => {
 
   return (
     <Layout>
-      <Title>Risk Calculator</Title>
-      <PortfolioSizeLabel>
-        <LabelText>Portfolio Size</LabelText>
-        <Input {...portfolioSizeInput} placeholder="63000" />
-      </PortfolioSizeLabel>
-      <Label>
-        <LabelText>% Risk</LabelText>
-        <PercentInput {...riskPercentageInput} placeholder="0" />
-        <RiskValue>
-          Amount at Risk: $
-          <span style={{ fontWeight: 600 }}>
-            {formatNumberWithCommas(calculatePortfolioRiskValue())}
-          </span>
-        </RiskValue>
-      </Label>
-      <TradeWrapper>
+      <Wrapper>
+        <Title>Risk Calculator</Title>
+        <PortfolioSizeLabel>
+          <LabelText>Portfolio Size</LabelText>
+          <Input {...portfolioSizeInput} placeholder="63000" />
+        </PortfolioSizeLabel>
         <Label>
-          <LabelText>Entry Price</LabelText>
-          <Input {...entryPriceInput} placeholder="0.00" />
+          <LabelText>% Risk</LabelText>
+          <PercentInput {...riskPercentageInput} placeholder="0" />
+          <RiskValue>
+            Amount at Risk: $
+            <span style={{ fontWeight: 600 }}>
+              {formatNumberWithCommas(calculatePortfolioRiskValue())}
+            </span>
+          </RiskValue>
         </Label>
-        <Label>
-          <LabelText>Exit Price</LabelText>
-          <Input {...exitPriceInput} placeholder="0.00" />
-        </Label>
-      </TradeWrapper>
+        <TradeWrapper>
+          <Label>
+            <LabelText>Entry Price</LabelText>
+            <Input {...entryPriceInput} placeholder="0.00" />
+          </Label>
+          <Label>
+            <LabelText>Exit Price</LabelText>
+            <Input {...exitPriceInput} placeholder="0.00" />
+          </Label>
+        </TradeWrapper>
 
-      <Summary>
-        <SummaryText>
-          Number of shares to buy : <br />
-          {Number.isNaN(sharesToBuy) ? (
-            "none"
-          ) : (
-            <div>
-              {sharesToBuy} (${calculateSharesToBuyValue()})
-            </div>
-          )}
-        </SummaryText>
-      </Summary>
+        <Summary>
+          <SummaryText>
+            Number of shares to buy : <br />
+            {Number.isNaN(sharesToBuy) ? (
+              "none"
+            ) : (
+              <div>
+                {sharesToBuy} (${calculateSharesToBuyValue()})
+              </div>
+            )}
+          </SummaryText>
+        </Summary>
+      </Wrapper>
     </Layout>
   );
 };
+
+const Wrapper = styled.div`
+  padding: 0 var(--space-sm);
+`;
 
 const Title = styled.h1`
   font-size: 2.5rem;

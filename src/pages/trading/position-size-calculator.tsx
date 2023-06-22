@@ -47,79 +47,85 @@ const PositionSizeCalculator: NextPage = () => {
 
   return (
     <Layout>
-      <Title>Postition Size Calculator</Title>
-      <PortfolioSizeLabel>
-        <LabelText>Portfolio Size</LabelText>
-        <Input {...portfolioProps} placeholder="50000" />
-      </PortfolioSizeLabel>
-      <TradeWrapper>
-        <TradeTypeWrapper>
+      <Wrapper>
+        <Title>Postition Size Calculator</Title>
+        <PortfolioSizeLabel>
+          <LabelText>Portfolio Size</LabelText>
+          <Input {...portfolioProps} placeholder="50000" />
+        </PortfolioSizeLabel>
+        <TradeWrapper>
+          <TradeTypeWrapper>
+            <Label>
+              Long
+              <RadioInput
+                type="radio"
+                value="long"
+                checked={tradeTypeValue === "long"}
+                onChange={(e) => setTradeTypeValue(e.target.value)}
+              />
+            </Label>
+            <Label>
+              Short
+              <RadioInput
+                type="radio"
+                value="short"
+                checked={tradeTypeValue === "short"}
+                onChange={(e) => setTradeTypeValue(e.target.value)}
+              />
+            </Label>
+          </TradeTypeWrapper>
           <Label>
-            Long
-            <RadioInput
-              type="radio"
-              value="long"
-              checked={tradeTypeValue === "long"}
-              onChange={(e) => setTradeTypeValue(e.target.value)}
-            />
+            <LabelText>Ticker Symbol</LabelText>
+            <Input placeholder="TLT" />
           </Label>
           <Label>
-            Short
-            <RadioInput
-              type="radio"
-              value="short"
-              checked={tradeTypeValue === "short"}
-              onChange={(e) => setTradeTypeValue(e.target.value)}
-            />
+            <LabelText>Share Price</LabelText>
+            <Input {...sharePriceProps} placeholder="10" />
           </Label>
-        </TradeTypeWrapper>
-        <Label>
-          <LabelText>Ticker Symbol</LabelText>
-          <Input placeholder="TLT" />
-        </Label>
-        <Label>
-          <LabelText>Share Price</LabelText>
-          <Input {...sharePriceProps} placeholder="10" />
-        </Label>
-        <Label>
-          <LabelText>Portfolio Risk</LabelText>
-          <Input {...portfolioRiskProps} placeholder="3" />
-        </Label>
-      </TradeWrapper>
+          <Label>
+            <LabelText>Portfolio Risk</LabelText>
+            <Input {...portfolioRiskProps} placeholder="3" />
+          </Label>
+        </TradeWrapper>
 
-      <Summary>
-        <RiskSummaryWrapper>
-          <RiskSummaryTitle>$ of portfolio risk</RiskSummaryTitle>
-          <RiskSummaryValue>{portfolioValueAtRisk}</RiskSummaryValue>
-        </RiskSummaryWrapper>
-        <RiskScenarioWrapper>
-          {[5, 10, 15, 20, 25, 30].map((risk, index) => {
-            return (
-              <Scenario key={index}>
-                <ScenarioShareTitle>
-                  {tradeTypeValue === "long" ? "-" : "+"}
-                  {risk}% change
-                </ScenarioShareTitle>
-                <ScenarioSharePrice>
-                  Risk Point: {calculateRiskPoint(risk)}
-                </ScenarioSharePrice>
-                <ScenarioTotalShares>
-                  # of Shares {calculateNumberOfShares(risk)}
-                </ScenarioTotalShares>
-                <ScenarioPositionSize>
-                  Position Size:
-                  {calculatePositionSizeValue(risk)} (
-                  {calculatePositionSizePercentage(risk)}
-                  %)
-                </ScenarioPositionSize>
-              </Scenario>
-            );
-          })}
-        </RiskScenarioWrapper>
-      </Summary>
+        <Summary>
+          <RiskSummaryWrapper>
+            <RiskSummaryTitle>$ of portfolio risk</RiskSummaryTitle>
+            <RiskSummaryValue>{portfolioValueAtRisk}</RiskSummaryValue>
+          </RiskSummaryWrapper>
+          <RiskScenarioWrapper>
+            {[5, 10, 15, 20, 25, 30].map((risk, index) => {
+              return (
+                <Scenario key={index}>
+                  <ScenarioShareTitle>
+                    {tradeTypeValue === "long" ? "-" : "+"}
+                    {risk}% change
+                  </ScenarioShareTitle>
+                  <ScenarioSharePrice>
+                    Risk Point: {calculateRiskPoint(risk)}
+                  </ScenarioSharePrice>
+                  <ScenarioTotalShares>
+                    # of Shares {calculateNumberOfShares(risk)}
+                  </ScenarioTotalShares>
+                  <ScenarioPositionSize>
+                    Position Size:
+                    {calculatePositionSizeValue(risk)} (
+                    {calculatePositionSizePercentage(risk)}
+                    %)
+                  </ScenarioPositionSize>
+                </Scenario>
+              );
+            })}
+          </RiskScenarioWrapper>
+        </Summary>
+      </Wrapper>
     </Layout>
   );
 };
+
+const Wrapper = styled.div`
+  padding: 0 var(--space-sm);
+`;
 
 const Title = styled.h1`
   font-size: 2.5rem;

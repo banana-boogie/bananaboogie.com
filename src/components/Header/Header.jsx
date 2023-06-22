@@ -14,7 +14,10 @@ const Header = ({ hideHomeButton = false }) => {
       {hideHomeButton ? (
         <Spacer />
       ) : (
-        <BackButton hide={hideHomeButton} onClick={() => router.push("/")}>
+        <BackButton
+          hide={hideHomeButton}
+          onClick={() => router.pathname !== "/" && router.push("/")}
+        >
           <BananaImage
             src="/banana.svg"
             alt="picture of a digitally drawn banana"
@@ -37,7 +40,7 @@ const Wrapper = styled.div`
   display: flex;
   height: 64px;
   padding: 0px var(--space-md);
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   gap: var(--space-md);
 

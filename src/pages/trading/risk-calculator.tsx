@@ -47,42 +47,48 @@ const RiskCalculator: NextPage = () => {
 
   return (
     <Layout>
-      <Title>Risk Calculator</Title>
-      <PortfolioSizeLabel>
-        <LabelText>Portfolio Size</LabelText>
-        <Input {...portfolioSizeInput} placeholder="63000" />
-      </PortfolioSizeLabel>
-      <TradeWrapper>
-        <Label>
-          <LabelText>Position Size</LabelText>
-          <PercentInput {...positionSizeInput} placeholder="0" />
-        </Label>
-        <Label>
-          <LabelText>Entry Price</LabelText>
-          <Input {...entryPriceInput} placeholder="0.00" />
-        </Label>
-        <Label>
-          <LabelText>Exit Price</LabelText>
-          <Input {...exitPriceInput} placeholder="0.00" />
-        </Label>
-      </TradeWrapper>
+      <Wrapper>
+        <Title>Risk Calculator</Title>
+        <PortfolioSizeLabel>
+          <LabelText>Portfolio Size</LabelText>
+          <Input {...portfolioSizeInput} placeholder="63000" />
+        </PortfolioSizeLabel>
+        <TradeWrapper>
+          <Label>
+            <LabelText>Position Size</LabelText>
+            <PercentInput {...positionSizeInput} placeholder="0" />
+          </Label>
+          <Label>
+            <LabelText>Entry Price</LabelText>
+            <Input {...entryPriceInput} placeholder="0.00" />
+          </Label>
+          <Label>
+            <LabelText>Exit Price</LabelText>
+            <Input {...exitPriceInput} placeholder="0.00" />
+          </Label>
+        </TradeWrapper>
 
-      <Summary>
-        <SummaryText>
-          Portfolio at Risk: <br />
-          {Number.isNaN(portfolioAtRisk) ? (
-            "waiting to calculate"
-          ) : (
-            <div>
-              {portfolioAtRiskPercentage}% ($
-              {formatNumberWithCommas(portfolioAtRisk)})
-            </div>
-          )}
-        </SummaryText>
-      </Summary>
+        <Summary>
+          <SummaryText>
+            Portfolio at Risk: <br />
+            {Number.isNaN(portfolioAtRisk) ? (
+              "waiting to calculate"
+            ) : (
+              <div>
+                {portfolioAtRiskPercentage}% ($
+                {formatNumberWithCommas(portfolioAtRisk)})
+              </div>
+            )}
+          </SummaryText>
+        </Summary>
+      </Wrapper>
     </Layout>
   );
 };
+
+const Wrapper = styled.div`
+  padding: 0 var(--space-sm);
+`;
 
 const Title = styled.h1`
   font-size: 2.5rem;

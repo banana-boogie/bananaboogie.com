@@ -16,7 +16,6 @@ export default function Layout({ hideHomeButton = false, children }) {
 const Wrapper = styled.div`
   height: 100%;
   margin: auto;
-  padding: 0 var(--space-sm);
   @media ${QUERIES.tabletAndBigger} {
     max-width: 1200px;
   }
