@@ -11,7 +11,8 @@ const Home: NextPage = () => {
       <Header hideHomeButton={true} />
       <Main>
         <Title>
-          HELLO <br /> BANANA
+          <TitleSmaller>HELLO</TitleSmaller>
+          <TitleBigger>BANANA</TitleBigger>
         </Title>
         <ImageContainer>
           <BananaImage
@@ -34,56 +35,59 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
+  display: grid;
+  place-content: center;
+  isolation: isolate;
+  height: 780px;
 
   @media ${QUERIES.tabletAndBigger} {
-    flex-direction: revert;
-    justify-content: revert;
-
-    display: grid;
-    place-content: center;
     position: relative;
     height: 70vh;
   }
 `;
 
-const Title = styled.h1`
-  color: var(--color-title);
-  text-align: center;
-  line-height: 0.3;
-  font-size: calc(12px + var(--font-size-xxl));
-  font-family: var(--font-family-heading);
+const Title = styled.div`
+  z-index: 2;
+`;
 
-  @media ${QUERIES.tabletAndBigger} {
-    font-size: var(--font-size-xxxl);
-  }
+const TitleSmaller = styled.h2`
+  color: var(--brown-monkey-text, #534f2a);
+  text-align: center;
+  font-size: 30px;
+  font-family: Happy Monkey;
+  font-weight: lighter;
+  line-height: 100%;
+`;
+const TitleBigger = styled.h1`
+  color: var(--brown-monkey-text, #534f2a);
+  font-size: 60px;
+  font-family: Lilita One;
+  line-height: 100%;
 `;
 
 const ImageContainer = styled.div`
   position: relative;
+  z-index: 1;
 `;
 
 const BananaImage = styled.img`
-  transform: rotate(21deg);
-  --image-size: 188px;
+  --image-size: 182px;
   height: var(--image-size);
   width: var(--image-size);
-  margin-top: var(--space-lg);
-  margin-left: var(--space-xl);
+  
+  position: absolute;
+  bottom: -42px;
+  right: -33px;
+  transform: rotate(19deg);
 
-  @media ${QUERIES.tabletAndBigger} {
-    position: absolute;
-    bottom: -188px;
-    right: -173px;
-    transform: rotate(6deg);
-
+  @media ${QUERIES.tabletAndBigger} {    
     --image-size: 236px
     height: var(--image-size);
     width: var(--image-size);
+
+    bottom: -188px;
+    right: -173px;
+    transform: rotate(6deg);
   }
 `;
 
