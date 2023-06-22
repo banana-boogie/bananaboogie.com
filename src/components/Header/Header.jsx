@@ -20,11 +20,11 @@ const Header = ({ hideBackButton = false }) => {
         </BackButton>
       )}
       <NavWrapper>
-        <Link href="/trading" passHref>
-          <NavLinkText>apps</NavLinkText>
-        </Link>
         <Link href="/blog" passHref>
           <NavLinkText>blog</NavLinkText>
+        </Link>
+        <Link href="/trading" passHref>
+          <NavLinkText>apps</NavLinkText>
         </Link>
       </NavWrapper>
     </Wrapper>
@@ -33,10 +33,11 @@ const Header = ({ hideBackButton = false }) => {
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: var(--space-lg) var(--space-md);
-  margin-bottom: var(--space-sm);
+  height: 64px;
+  padding: 0px var(--space-md);
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-md);
 
   @media ${QUERIES.tabletAndBigger} {
     padding: var(--space-lg) var(--space-xxl);

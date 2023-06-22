@@ -247,26 +247,7 @@ html {
   --color-primary: hsl(${COLORS.primary});
   --color-secondary: hsl(${COLORS.secondary});
   --color-accent: hsl(${COLORS.accent});
-  --color-gray-100: hsl(${COLORS.gray[100]});
-  --color-gray-300: hsl(${COLORS.gray[300]});
-  --color-gray-500: hsl(${COLORS.gray[500]});
-  --color-gray-700: hsl(${COLORS.gray[700]});
-  --color-gray-900: hsl(${COLORS.gray[900]});
-  --color-gray-backdrop: hsl(${COLORS.gray[900]} / 0.8);
-  --color-yellow-100: hsl(${COLORS.yellow[100]});
-  --color-yellow-300: hsl(${COLORS.yellow[300]});
-  --color-yellow-500: hsl(${COLORS.yellow[500]});
-  --color-yellow-700: hsl(${COLORS.yellow[700]});
-  --color-yellow-900: hsl(${COLORS.yellow[900]});
-  --color-blue-100: hsl(${COLORS.blue[100]});
-  --color-blue-200: hsl(${COLORS.blue[200]});
-  --color-blue-300: hsl(${COLORS.blue[300]});
-  --color-blue-400: hsl(${COLORS.blue[400]});
-  --color-blue-500: hsl(${COLORS.blue[500]});
-  --color-blue-600: hsl(${COLORS.blue[600]});
-  --color-blue-700: hsl(${COLORS.blue[700]});
-  --color-blue-800: hsl(${COLORS.blue[800]});
-  --color-blue-900: hsl(${COLORS.blue[900]});
+
 }
 
 
