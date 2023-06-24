@@ -111,6 +111,16 @@ Global Styles
 *
 *
 */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
+}
+
 #root {
   /*
     Create a stacking context, without a z-index.
@@ -177,17 +187,10 @@ strong {
     border: 2px solid var(--color-background);
   }
 }
-
-/* GLOBAL STYLES */
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  line-height: 1.5;
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: auto;
-}
+/** Third Party Overrides */
+#__next {
+   height: 100%;
+ }
  
 /** CSS Variables */
 html {
@@ -249,13 +252,6 @@ html {
 
   /* FONT COLORS */
   --color-font-primary: hsl(${COLORS.font.primary});
-
 }
-
-
-/** Third Party Overrides */
-#__next {
-   height: 100%;
- }
 `;
 export default GlobalStyles;

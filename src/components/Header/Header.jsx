@@ -55,7 +55,7 @@ const Spacer = styled.div`
 `;
 
 const BackButton = styled(UnstyledButton)`
-  --image-size: 50px;
+  --image-size: 42px;
 
   display: ${({ hide }) => (hide ? "none" : "block")};
   position: relative;
@@ -73,7 +73,7 @@ const BananaImage = styled.img`
   width: var(--image-size);
   transform: rotate(12deg);
 
-  filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.3));
   transition: filter 0.3s ease-in-out;
 
   &:hover {
@@ -99,12 +99,12 @@ const NavLinkText = styled.a`
   color: var(--color-font-primary);
   text-decoration: none;
   text-align: center;
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
   font-family: var(--font-family-subheading);
   line-height: 100%;
 
   @media ${QUERIES.tabletAndBigger} {
-    font-size: calc(4px + var(--font-size-md));
+    font-size: var(--font-size-sm);
   }
 `;
 
