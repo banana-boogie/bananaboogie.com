@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         </Title>
         <ImageContainer>
           <BananaImage
-            src="/banana.svg"
+            src="/images/banana.svg"
             alt="picture of a digitally drawn banana"
           />
         </ImageContainer>
