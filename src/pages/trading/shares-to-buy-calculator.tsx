@@ -3,10 +3,10 @@ import type { NextPage } from "next";
 import styled from "styled-components";
 
 import Layout from "@/components/Layout/Layout";
-import useInput from "@hooks/useInput.hook";
-import { formatNumberWithCommas } from "@utils/index";
+import useInput from "@/lib/hooks/useInput.hook";
+import { formatNumberWithCommas } from "@/lib/utils/index";
 
-import { calculateSharesToBuy } from "@/utils/trading";
+import { calculateSharesToBuy } from "@/lib/utils/trading";
 
 const SharesToBuyCalculator: NextPage = () => {
   const portfolioSizeInput = useInput(63000);

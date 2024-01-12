@@ -132,7 +132,6 @@ Global Styles
 
 body {
   color: var(--color-text);
-  background: var(--color-background);
 }
 
 a:focus {
@@ -243,7 +242,10 @@ html {
 
 
   /* COLORS */
-  --color-background: hsl(${COLORS.background});
+  --color-background-default: hsl(${COLORS.background.default});
+  --color-background-blog: hsl(${COLORS.background.blog});
+  --color-background-blog-main-post: hsl(${COLORS.background.blogMainPost});
+  --color-background-blog-sub-post: hsl(${COLORS.background.blogSubPost});
   --color-text: hsl(${COLORS.gray[900]});
   --color-white: hsl(${COLORS.white});
   --color-primary: hsl(${COLORS.primary});

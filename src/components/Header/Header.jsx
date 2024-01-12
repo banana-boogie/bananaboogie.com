@@ -7,7 +7,7 @@ import { QUERIES } from "@/contstants";
 
 import UnstyledButton from "@components/UnstyledButton";
 
-const Header = ({ hideHomeButton = false }) => {
+const Header = ({ hideHomeButton = false, headerTitle = "" }) => {
   const router = useRouter();
   return (
     <Wrapper>
@@ -21,6 +21,7 @@ const Header = ({ hideHomeButton = false }) => {
           <BananaImage src="/images/tropical_circle.png" alt="home button" />
         </BackButton>
       )}
+      {headerTitle && <Title>{headerTitle}</Title>}
       <NavWrapper>
         <Link href="/blog" passHref>
           <NavLinkText>blog</NavLinkText>
@@ -42,7 +43,8 @@ const Wrapper = styled.div`
   gap: var(--space-md);
 
   @media ${QUERIES.tabletAndBigger} {
-    padding: var(--space-lg) var(--space-xxl);
+    padding: 0 var(--space-xxl);
+    padding-top: var(--space-xl);
     margin-bottom: var(--space-lg);
   }
 `;
@@ -82,6 +84,18 @@ const BananaImage = styled.img`
   }
 
   @media ${QUERIES.tabletAndBigger} {
+  }
+`;
+
+const Title = styled.h1`
+  color: var(--color-font-primary);
+  text-align: left;
+  line-height: 1;
+  font-size: calc(12px + var(--font-size-xl));
+  font-family: var(--font-family-heading);
+
+  @media ${QUERIES.tabletAndBigger} {
+    font-size: var(--font-size-xxl);
   }
 `;
 

@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import styled from "styled-components";
 
 import Layout from "@/components/Layout/Layout";
-import useInput from "../../hooks/useInput.hook";
+import useInput from "../../lib/hooks/useInput.hook";
 import { QUERIES } from "@/contstants";
 
 const PositionSizeCalculator: NextPage = () => {
