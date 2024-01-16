@@ -221,6 +221,9 @@ html {
   --font-weight-semibold: ${WEIGHTS.semiBold};
   --font-weight-bold: ${WEIGHTS.bold};
 
+  /* FONT COLORS */
+  --color-font-primary: hsl(${COLORS.font.primary});
+  
   /* SPACING */
   --space-xxxs: ${SPACING.xxxs};
   --space-xxs: ${SPACING.xxs};
@@ -252,8 +255,6 @@ html {
   --color-secondary: hsl(${COLORS.secondary});
   --color-accent: hsl(${COLORS.accent});
 
-  /* FONT COLORS */
-  --color-font-primary: hsl(${COLORS.font.primary});
 }
 `;
 export default GlobalStyles;

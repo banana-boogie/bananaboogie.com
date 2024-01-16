@@ -16,11 +16,15 @@
     "@fontsource/open-sans": "^4.5.14",
     "@mdx-js/loader": "^2.1.1",
     "axios": "^0.27.2",
+    "date-fn": "^0.0.2",
+    "date-fns": "^3.2.0",
     "gray-matter": "^4.0.3",
     "next": "12.1.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "reddit": "^1.2.1",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
