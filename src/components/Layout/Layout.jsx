@@ -1,3 +1,4 @@
+import Head from "next/head";
 import styled from "styled-components";
 
 import Header from "@components/Header";
@@ -10,19 +11,20 @@ export default function Layout({
   children
 }) {
   return (
-    <Background background={background}>
-      <Wrapper>
-        <Header headerTitle={headerTitle} hideHomeButton={hideHomeButton} />
-        <main>{children}</main>
-        <footer />
-      </Wrapper>
-    </Background>
+    <Wrapper>
+      <Head>
+        <style>
+          {`html, body {
+            background-color: ${background}
+          }`}
+        </style>
+      </Head>
+      <Header headerTitle={headerTitle} hideHomeButton={hideHomeButton} />
+      <main>{children}</main>
+      <footer />
+    </Wrapper>
   );
 }
-const Background = styled.div`
-  background-color: ${(p) => p.background};
-  height: 100%;
-`;
 
 const Wrapper = styled.div`
   height: 100%;
