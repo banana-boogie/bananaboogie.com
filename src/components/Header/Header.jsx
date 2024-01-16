@@ -91,11 +91,11 @@ const Title = styled.h1`
   color: var(--color-font-primary);
   text-align: left;
   line-height: 1;
-  font-size: calc(12px + var(--font-size-xl));
   font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
 
   @media ${QUERIES.tabletAndBigger} {
-    font-size: var(--font-size-xxl);
+    font-size: calc(12px + var(--font-size-xl));
   }
 `;
 

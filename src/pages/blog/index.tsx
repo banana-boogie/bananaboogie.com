@@ -69,7 +69,10 @@ const PostsWrapper = styled.ul`
   grid-template-columns: 1fr 1fr;
   grid-column-gap: var(--space-xxl);
   grid-row-gap: var(--space-xl);
-  margin-top: var(--space-xl);
+
+  @media ${QUERIES.tabletAndBigger} {
+    margin-top: var(--space-xl);
+  }
 `;
 
 const MainPost = styled.li`

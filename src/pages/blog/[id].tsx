@@ -4,6 +4,8 @@ import Date from "@components/Date";
 import { getPostData, getAllPostIds } from "@/lib/posts";
 import styled from "styled-components";
 
+import { QUERIES } from "@/contstants";
+
 type StaticProps = {
   params: {
     id: string;
@@ -51,9 +53,14 @@ export default function Post({ postData }: { postData: PostData }) {
 }
 
 const Wrapper = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  margin-top: calc(var(--space-xxl) + 24px);
+  padding: 0 var(--space-lg);
+  margin-top: var(--space-lg);
+
+  @media ${QUERIES.tabletAndBigger} {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: calc(var(--space-xxl) + 24px);
+  }
 `;
 
 const Title = styled.h1`
