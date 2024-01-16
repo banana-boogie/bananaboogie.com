@@ -2,6 +2,7 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import Date from "@components/Date";
 import { getPostData, getAllPostIds } from "@/lib/posts";
+import styled from "styled-components";
 
 type StaticProps = {
   params: {
@@ -39,8 +40,45 @@ export default function Post({ postData }: { postData: PostData }) {
       <Head>
         <title>{postData.title}</title>
       </Head>
-      <Date dateString={postData.date} />
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      <Wrapper>
+        <Title>{postData.title}</Title>
+        <Divider />
+        <Content dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        <DateItem dateString={postData.date} />
+      </Wrapper>
     </Layout>
   );
 }
+
+const Wrapper = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: calc(var(--space-xxl) + 24px);
+`;
+
+const Title = styled.h1`
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-sm);
+`;
+
+const Divider = styled.hr`
+  margin-bottom: var(--space-xl);
+`;
+
+const Content = styled.div`
+  p:first-of-type {
+    text-indent: var(--space-md);
+
+    &::first-letter {
+      font-size: 200%; /* Adjust the value as needed */
+      font-weight: bold; /* Optional, for added emphasis */
+    }
+  }
+
+  margin-bottom: var(--space-xxl);
+`;
+
+const DateItem = styled(Date)`
+  display: flex;
+  flex-direction: row-reverse;
+`;
