@@ -29,14 +29,16 @@ const Blog = ({ allPostsData }: { allPostsData: any }) => {
     <Layout background="var(--color-background-blog)" headerTitle="Banana Blog">
       <Wrapper>
         <PostsWrapper>
-          <Link passHref href={`/blog/${encodeURIComponent(mainPost.id)}`}>
-            <MainPost>
-              <MainPostTitle>{mainPost.title}</MainPostTitle>
-              <MainPostSnippet
-                dangerouslySetInnerHTML={{ __html: mainPost.snippet }}
-              />
-            </MainPost>
-          </Link>
+          {mainPost && (
+            <Link passHref href={`/blog/${encodeURIComponent(mainPost.id)}`}>
+              <MainPost>
+                <MainPostTitle>{mainPost.title}</MainPostTitle>
+                <MainPostSnippet
+                  dangerouslySetInnerHTML={{ __html: mainPost.snippet }}
+                />
+              </MainPost>
+            </Link>
+          )}
           {subPosts.map(({ id, title, snippet }: SubPost) => (
             <Link key={id} passHref href={`/blog/${encodeURIComponent(id)}`}>
               <SubPost>
