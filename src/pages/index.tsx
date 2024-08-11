@@ -4,11 +4,11 @@ import styled from "styled-components";
 
 import Header from "@/components/Header";
 import { QUERIES } from "@/contstants";
+import Layout from "@/components/Layout";
 
 const Home: NextPage = () => {
   return (
-    <Wrapper>
-      <Header hideHomeButton={false} />
+    <Layout>
       <Main>
         <Title>
           <TitleSmaller>HELLO</TitleSmaller>
@@ -16,24 +16,14 @@ const Home: NextPage = () => {
         </Title>
         <ImageContainer>
           <BananaImage
-            src="/banana.svg"
+            src="/images/banana.svg"
             alt="picture of a digitally drawn banana"
           />
         </ImageContainer>
       </Main>
-    </Wrapper>
+    </Layout>
   );
 };
-
-const Wrapper = styled.div`
-  margin: 0 auto;
-  height: 100%;
-
-  @media ${QUERIES.tabletAndBigger} {
-    max-width: 1200px;
-  }
-`;
-
 const Main = styled.main`
   display: grid;
   place-content: center;

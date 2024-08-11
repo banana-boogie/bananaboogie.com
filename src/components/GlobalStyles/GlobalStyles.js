@@ -132,7 +132,6 @@ Global Styles
 
 body {
   color: var(--color-text);
-  background: var(--color-background);
 }
 
 a:focus {
@@ -222,6 +221,9 @@ html {
   --font-weight-semibold: ${WEIGHTS.semiBold};
   --font-weight-bold: ${WEIGHTS.bold};
 
+  /* FONT COLORS */
+  --color-font-primary: hsl(${COLORS.font.primary});
+  
   /* SPACING */
   --space-xxxs: ${SPACING.xxxs};
   --space-xxs: ${SPACING.xxs};
@@ -243,15 +245,16 @@ html {
 
 
   /* COLORS */
-  --color-background: hsl(${COLORS.background});
+  --color-background-default: hsl(${COLORS.background.default});
+  --color-background-blog: hsl(${COLORS.background.blog});
+  --color-background-blog-main-post: hsl(${COLORS.background.blogMainPost});
+  --color-background-blog-sub-post: hsl(${COLORS.background.blogSubPost});
   --color-text: hsl(${COLORS.gray[900]});
   --color-white: hsl(${COLORS.white});
   --color-primary: hsl(${COLORS.primary});
   --color-secondary: hsl(${COLORS.secondary});
   --color-accent: hsl(${COLORS.accent});
 
-  /* FONT COLORS */
-  --color-font-primary: hsl(${COLORS.font.primary});
 }
 `;
 export default GlobalStyles;

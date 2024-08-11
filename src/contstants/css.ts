@@ -22,7 +22,12 @@ export const COLORS = {
   primary: "207deg, 100%, 49%",
   secondary: "240deg 60% 63%",
   accent: "28deg 75% 71%",
-  background: "50deg 96% 58%",
+  background: {
+    default: "52deg 100% 67%",
+    blog: "51.43deg 100% 98.63%",
+    blogMainPost: "51.76deg 100% 90%",
+    blogSubPost: "53deg 100% 97%"
+  },
   backgroundAlert: {
     success: "158deg 67% 95%",
     info: "187deg 86% 95%",
