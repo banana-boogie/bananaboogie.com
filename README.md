@@ -1,20 +1,9 @@
-## Getting Started
+# Welcome to the BananaBoogie!!!
 
-Welcome to the BananaBoogie!!!
+This is my personal website.
 
-The site is built using Next.js and deployed on Vercel.
-Packages include:
+It has a few things:
 
-- Styled Components
-- Prettier
-- Lint Staged
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000)
+- My personal blog
+- Tools to help me trade stocks
+- Experiemental apps
