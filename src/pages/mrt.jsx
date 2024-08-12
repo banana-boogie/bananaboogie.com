@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled, { keyframes } from "styled-components";
-import axios from "axios";
 
 import Icon from "@components/Icon";
 import Layout from "@components/Layout";
@@ -34,11 +33,24 @@ const MRT = () => {
       subreddits,
       urls
     };
+
     try {
       setIsSearching(true);
-      const response = await axios.post(`/api/search-reddit`, query);
 
-      setSearchData(response.data);
+      const response = await fetch("/api/search-reddit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(query)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setSearchData(data);
     } catch (error) {
       console.error(error);
     } finally {

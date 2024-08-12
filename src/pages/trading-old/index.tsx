@@ -10,15 +10,18 @@ const MRT = () => {
       <Wrapper>
         <Title>Trading Co.</Title>
         <LinkWrapper>
-          <NextLink passHref href="/trading/risk-calculator">
-            <LinkText>Risk Calculator</LinkText>
-          </NextLink>
-          <NextLink passHref href="/trading/shares-to-buy-calculator">
-            <LinkText>Shares To Buy Calculator</LinkText>
-          </NextLink>
-          <NextLink passHref href="/trading/position-size-calculator">
-            <LinkText>Position Size Calculator</LinkText>
-          </NextLink>
+          <Link passHref href="/trading/options-tool">
+            Options Tool
+          </Link>
+          <Link passHref href="/trading-old/risk-calculator">
+            Risk Calculator
+          </Link>
+          <Link passHref href="/trading-old/shares-to-buy-calculator">
+            Shares To Buy Calculator
+          </Link>
+          <Link passHref href="/trading-old/position-size-calculator">
+            Position Size Calculator
+          </Link>
         </LinkWrapper>
       </Wrapper>
     </Layout>
@@ -57,7 +60,7 @@ const LinkWrapper = styled.div`
   padding: 0px var(--space-md);
 `;
 
-const LinkText = styled.a`
+const Link = styled(NextLink)`
   color: var(--color-text);
   text-decoration: none;
   font-size: 1.5rem;
