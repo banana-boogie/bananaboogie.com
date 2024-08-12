@@ -26,7 +26,7 @@ const Header = ({ hideHomeButton = false, headerTitle = "" }) => {
         <NavLink href="/blog" passHref>
           blog
         </NavLink>
-        <NavLink href="/trading_old" passHref>
+        <NavLink href="/trading-old" passHref>
           apps
         </NavLink>
       </NavWrapper>

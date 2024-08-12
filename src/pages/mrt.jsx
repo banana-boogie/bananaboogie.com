@@ -1,5 +1,4 @@
 import * as React from "react";
-import fetch from "node-fetch";
 import styled, { keyframes } from "styled-components";
 
 import Icon from "@components/Icon";

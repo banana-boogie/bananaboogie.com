@@ -14,7 +14,7 @@ type Stock = {
   price: number;
 };
 
-const OptionsProfitCalculator: React.FC = () => {
+const OptionsScenario: React.FC = () => {
   const [stock, setStock] = useState<Stock>({ symbol: "", name: "", price: 0 });
   const [budget, setBudget] = useState<number>(0);
   const [scenarios, setScenarios] = useState<Scenario[]>([
@@ -122,7 +122,7 @@ const OptionsProfitCalculator: React.FC = () => {
   return (
     <div className="container mx-auto p-4 max-w-3xl">
       <h1 className="text-2xl font-bold mb-4 text-center">
-        Options Profit Calculator
+        Options Scenario Tool
       </h1>
 
       <div className="mb-4">
@@ -280,4 +280,4 @@ const OptionsProfitCalculator: React.FC = () => {
   );
 };
 
-export default OptionsProfitCalculator;
+export default OptionsScenario;
