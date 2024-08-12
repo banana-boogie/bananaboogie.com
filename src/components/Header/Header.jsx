@@ -23,12 +23,12 @@ const Header = ({ hideHomeButton = false, headerTitle = "" }) => {
       )}
       {headerTitle && <Title>{headerTitle}</Title>}
       <NavWrapper>
-        <Link href="/blog" passHref>
-          <NavLinkText>blog</NavLinkText>
-        </Link>
-        <Link href="/trading" passHref>
-          <NavLinkText>apps</NavLinkText>
-        </Link>
+        <NavLink href="/blog" passHref>
+          blog
+        </NavLink>
+        <NavLink href="/trading" passHref>
+          apps
+        </NavLink>
       </NavWrapper>
     </Wrapper>
   );
@@ -109,7 +109,7 @@ const NavWrapper = styled.nav`
   }
 `;
 
-const NavLinkText = styled.a`
+const NavLink = styled(Link)`
   color: var(--color-font-primary);
   text-decoration: none;
   text-align: center;
