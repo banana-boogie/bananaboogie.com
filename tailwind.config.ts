@@ -10,7 +10,18 @@ const config: Config = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        "monkey-brown": "#534f2a"
+      },
+      fontFamily: {
+        "happy-monkey": ["Happy Monkey", "cursive"],
+        "lilita-one": ["Lilita One", "cursive"]
+      },
+      rotate: {
+        "13": "13deg"
+      }
+    }
   },
   plugins: []
 };
