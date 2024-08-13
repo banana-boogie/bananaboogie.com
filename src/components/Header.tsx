@@ -2,7 +2,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const Header = () => {
+interface HeaderProps {
+  title?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <header className="p-4 flex justify-between items-center">
       <div className="flex items-center">
@@ -18,6 +22,9 @@ const Header = () => {
             className="rounded-full"
           />
         </Link>
+        {title && (
+          <h1 className="ml-4 text-3xl font-bold text-yellow-800">{title}</h1>
+        )}
       </div>
       <nav>
         <Link href="/blog" className="mr-4 hover:underline">

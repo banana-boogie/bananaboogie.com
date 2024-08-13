@@ -1,17 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import { getSortedPostsData } from "@/lib/posts";
-
-type SubPost = {
-  id: string;
-  title: string;
-  snippet: string;
-};
+import { Post, getSortedPosts } from "@/lib/posts";
 
 export default async function BlogPage() {
-  const allPostsData = await getSortedPostsData();
-  const mainPost = allPostsData[0];
-  const subPosts = allPostsData.slice(1);
+  const allPosts = await getSortedPosts();
+  const mainPost = allPosts[0];
+  const subPosts = allPosts.slice(1);
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,18 +23,18 @@ export default async function BlogPage() {
             </Link>
           </li>
         )}
-        {subPosts.map(({ id, title, snippet }: SubPost) => (
+        {subPosts.map((post: Post) => (
           <li
-            key={id}
+            key={post.id}
             className="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300"
           >
-            <Link href={`/blog/${encodeURIComponent(id)}`}>
+            <Link href={`/blog/${encodeURIComponent(post.id)}`}>
               <h3 className="text-xl font-semibold text-yellow-800 mb-2">
-                {title}
+                {post.title}
               </h3>
               <p
                 className="text-yellow-700"
-                dangerouslySetInnerHTML={{ __html: snippet }}
+                dangerouslySetInnerHTML={{ __html: post.snippet }}
               />
             </Link>
           </li>

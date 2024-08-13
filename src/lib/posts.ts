@@ -5,16 +5,16 @@ import { remark } from "remark";
 import html from "remark-html";
 import { POSTS_DIRECTORY } from "@/contstants/blog";
 
-interface PostData {
+export interface Post {
   id: string;
   date: string;
   [key: string]: any; // To accommodate any other properties in the frontmatter
 }
 
-export function getSortedPostsData() {
+export function getSortedPosts() {
   // Get file names under /posts
   const fileNames = fs.readdirSync(POSTS_DIRECTORY);
-  const allPostsData: PostData[] = fileNames.map((fileName) => {
+  const allPostsData: Post[] = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, "");
 
@@ -29,7 +29,7 @@ export function getSortedPostsData() {
     return {
       id,
       ...matterResult.data
-    } as PostData;
+    } as Post;
   });
 
   // Sort posts by date
@@ -42,7 +42,7 @@ export function getSortedPostsData() {
   });
 }
 
-export async function getPostData(id: string) {
+export async function getPost(id: string) {
   const fullPath = path.join(POSTS_DIRECTORY, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 

@@ -8,8 +8,8 @@ export default function BlogLayout({
 }) {
   return (
     <div className="min-h-screen bg-yellow-50">
-      <Header />
-      {children}
+      <Header title="Banana Blog" />
+      <main className="p-8">{children}</main>
     </div>
   );
 }
