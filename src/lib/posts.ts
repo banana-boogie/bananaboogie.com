@@ -5,85 +5,77 @@ import { remark } from "remark";
 import html from "remark-html";
 import { POSTS_DIRECTORY } from "@/contstants/blog";
 
-interface PostData {
-  id: string;
+export interface Post {
+  slug: string;
+  title: string;
   date: string;
-  [key: string]: any; // To accommodate any other properties in the frontmatter
+  contentHtml: string;
+  [key: string]: any;
 }
 
-export function getSortedPostsData() {
-  // Get file names under /posts
-  const fileNames = fs.readdirSync(POSTS_DIRECTORY);
-  const allPostsData: PostData[] = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, "");
+function getPostFilenames(): string[] {
+  return fs.readdirSync(POSTS_DIRECTORY);
+}
 
-    // Read markdown file as string
-    const fullPath = path.join(POSTS_DIRECTORY, fileName);
+function getPostFilePath(filename: string): string {
+  return path.join(POSTS_DIRECTORY, filename);
+}
+
+function parsePostContent(fileContents: string): {
+  data: any;
+  content: string;
+} {
+  return matter(fileContents);
+}
+
+async function markdownToHtml(markdown: string): Promise<string> {
+  const result = await remark().use(html).process(markdown);
+  return result.toString();
+}
+
+export function getSortedPosts(): Post[] {
+  const filenames = getPostFilenames();
+  const allPosts = filenames.map((filename) => {
+    const slug = filename.replace(/\.md$/, "");
+    const fullPath = getPostFilePath(filename);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const { data } = parsePostContent(fileContents);
+
+    return {
+      slug,
+      ...data
+    } as Post;
+  });
+
+  return allPosts.sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+export async function getPost(slug: string): Promise<Post | undefined> {
+  try {
+    const fullPath = getPostFilePath(`${slug}.md`);
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
+    const { data, content } = parsePostContent(fileContents);
+    const contentHtml = await markdownToHtml(content);
 
-    // Combine the data with the id
     return {
-      id,
-      ...matterResult.data
-    } as PostData;
-  });
-
-  // Sort posts by date
-  return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
-}
-
-export async function getPostData(id: string) {
-  const fullPath = path.join(POSTS_DIRECTORY, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
-
-  // Use remark to convert markdown into HTML string
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
-
-  // Combine the data with the id and contentHtml
-  return {
-    id,
-    contentHtml,
-    ...matterResult.data
-  };
-}
-
-export function getAllPostIds() {
-  const fileNames = fs.readdirSync(POSTS_DIRECTORY);
-
-  // Returns an array that looks like this:
-  // [
-  //   {
-  //     params: {
-  //       id: 'ssg-ssr'
-  //     }
-  //   },
-  //   {
-  //     params: {
-  //       id: 'pre-rendering'
-  //     }
-  //   }
-  // ]
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, "")
-      }
+      slug,
+      contentHtml,
+      title: data.title,
+      date: data.date,
+      ...data
     };
-  });
+  } catch (error) {
+    console.error(`Error fetching post ${slug}:`, error);
+    return undefined;
+  }
+}
+
+export function getAllPostSlugs() {
+  const filenames = getPostFilenames();
+  return filenames.map((filename) => ({
+    params: {
+      slug: filename.replace(/\.md$/, "")
+    }
+  }));
 }
