@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import Header from "@/components/Header";
+
 import "./globals.css";
 import { Happy_Monkey, Lilita_One } from "next/font/google";
 
@@ -27,7 +29,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${happyMonkey.variable} ${lilitaOne.variable}`}>
-      <body>{children}</body>
+      <body>
+        <main className="min-h-screen bg-yellow-200">
+          <Header />
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
