@@ -1,7 +1,19 @@
 import type { Metadata } from "next";
 
-// These styles apply to every route in the application
 import "./globals.css";
+import { Happy_Monkey, Lilita_One } from "next/font/google";
+
+const happyMonkey = Happy_Monkey({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-happy-monkey"
+});
+
+const lilitaOne = Lilita_One({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-lilita-one"
+});
 
 export const metadata: Metadata = {
   title: "Banana Boogie",
@@ -14,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${happyMonkey.variable} ${lilitaOne.variable}`}>
       <body>{children}</body>
     </html>
   );
