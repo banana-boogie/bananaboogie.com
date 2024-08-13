@@ -16,7 +16,12 @@ const config: Config = {
       },
       fontFamily: {
         "happy-monkey": ["var(--font-happy-monkey), sans"],
-        "lilita-one": ["var(--font-lilita-one), sans"]
+        "lilita-one": ["var(--font-lilita-one), sans"],
+        montserrat: ["var(--font-montserrat)"],
+        "open-sans": ["var(--font-open-sans)"],
+        "noto-sans-canadian-aboriginal": [
+          "var(--font-noto-sans-canadian-aboriginal)"
+        ]
       },
       rotate: {
         "13": "13deg"

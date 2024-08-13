@@ -23,10 +23,12 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           />
         </Link>
         {title && (
-          <h1 className="ml-4 text-3xl font-bold text-yellow-800">{title}</h1>
+          <h1 className="ml-4 text-3xl font-happy-monkey text-yellow-800">
+            {title}
+          </h1>
         )}
       </div>
-      <nav>
+      <nav className="font-noto-sans-canadian-aboriginal">
         <Link href="/blog" className="mr-4 hover:underline">
           blog
         </Link>

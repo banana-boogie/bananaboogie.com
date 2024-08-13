@@ -1,5 +1,12 @@
-import Header from "@/components/Header";
 import React from "react";
+import type { Metadata } from "next";
+
+import Header from "@/components/Header";
+
+export const metadata: Metadata = {
+  title: "Banana Blog",
+  description: "A blog about bananas and more"
+};
 
 export default function BlogLayout({
   children
