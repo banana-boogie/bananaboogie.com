@@ -30,10 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${happyMonkey.variable} ${lilitaOne.variable}`}>
       <body>
-        <main className="min-h-screen bg-yellow-200">
-          <Header />
-          {children}
-        </main>
+        <main className="min-h-screen">{children}</main>
       </body>
     </html>
   );

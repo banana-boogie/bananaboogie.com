@@ -6,7 +6,10 @@ const Header = () => {
   return (
     <header className="p-4 flex justify-between items-center">
       <div className="flex items-center">
-        <button className="text-sm bg-white bg-opacity-20 rounded-full overflow-hidden">
+        <Link
+          href="/"
+          className="text-sm bg-white bg-opacity-20 rounded-full overflow-hidden"
+        >
           <Image
             src="/images/tropical_circle.png"
             alt="home button"
@@ -14,7 +17,7 @@ const Header = () => {
             height={42}
             className="rounded-full"
           />
-        </button>
+        </Link>
       </div>
       <nav>
         <Link href="/blog" className="mr-4 hover:underline">

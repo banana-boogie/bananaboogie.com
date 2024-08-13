@@ -1,9 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-yellow-100">
+      <Header />
       <main className="flex-grow flex flex-col justify-center items-center relative">
         <div className="absolute inset-0 flex items-center justify-center z-0">
           <Image
