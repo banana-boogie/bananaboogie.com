@@ -1,3 +1,4 @@
+// app/page.tsx
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,15 +8,15 @@ import { appSections } from "./data";
 const AppCard: React.FC<App> = ({ name, description, image, link }) => (
   <Link href={link} className="block">
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-48 overflow-hidden group">
         <Image
           src={image}
           alt={name}
           width={300}
           height={200}
-          className="w-full h-full object-cover transition-all duration-300 ease-in-out brightness-75 hover:bg-opacity-0 hover:brightness-100 hover:scale-110"
+          className="w-full h-full object-cover transition-all duration-300 ease-in-out brightness-75 contrast-100 group-hover:brightness-90 group-hover:contrast-90 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300 ease-in-out hover:opacity-0"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300 ease-in-out group-hover:opacity-0"></div>
       </div>
       <div className="p-4">
         <h2 className="text-xl font-semibold mb-2">{name}</h2>

@@ -120,13 +120,13 @@ const OptionsScenario: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-3xl">
-      <h1 className="text-2xl font-bold mb-4 text-center">
+    <div className="container mx-auto py-4 px-8 max-w-3xl bg-white rounded">
+      <h1 className="text-2xl font-bold mb-6 text-center">
         Options Scenario Tool
       </h1>
 
       <div className="mb-4">
-        <label htmlFor="stock" className="block mb-2">
+        <label htmlFor="stock" className="block mb-1">
           Stock Symbol
         </label>
         <input
@@ -140,7 +140,7 @@ const OptionsScenario: React.FC = () => {
       </div>
 
       <div className="mb-4">
-        <label htmlFor="budget" className="block mb-2">
+        <label htmlFor="budget" className="block mb-1">
           Budget
         </label>
         <input
@@ -153,8 +153,8 @@ const OptionsScenario: React.FC = () => {
         />
       </div>
 
-      <div className="mb-4">
-        <h2 className="text-xl font-semibold mb-2">Scenarios</h2>
+      <div className="mb-4 mt-8">
+        <h2 className="text-xl font-semibold mb-4">Scenarios</h2>
         {scenarios.map((scenario) => (
           <div key={scenario.id} className="mb-4 p-4 border rounded">
             <div className="flex justify-between mb-2">
@@ -168,7 +168,7 @@ const OptionsScenario: React.FC = () => {
                 </button>
               )}
             </div>
-            <div className="mb-2">
+            <div className="mb-4">
               <label
                 htmlFor={`targetPrice-${scenario.id}`}
                 className="block mb-1"
@@ -191,7 +191,7 @@ const OptionsScenario: React.FC = () => {
               />
             </div>
             {scenario.strikes.map((strike, index) => (
-              <div key={index} className="mb-2 p-2 border rounded">
+              <div key={index} className="mb-6 p-2 border rounded">
                 <div className="flex justify-between mb-2">
                   <h4 className="font-medium">Strike {index + 1}</h4>
                   {scenario.strikes.length > 1 && (
@@ -251,7 +251,7 @@ const OptionsScenario: React.FC = () => {
                     />
                   </div>
                 </div>
-                <div className="mt-2">
+                <div className="mt-4 mb-2">
                   <strong>Estimated Profit:</strong>{" "}
                   {scenario.targetPrice &&
                   strike.strikePrice &&
@@ -271,7 +271,7 @@ const OptionsScenario: React.FC = () => {
         ))}
         <button
           onClick={addScenario}
-          className="flex items-center text-blue-500"
+          className="flex items-center text-blue-500 mt-6"
         >
           <PlusCircle size={20} className="mr-2" /> Add Scenario
         </button>
