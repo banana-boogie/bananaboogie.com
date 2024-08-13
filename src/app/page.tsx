@@ -38,8 +38,10 @@ export default function Home() {
           />
         </div>
         <h1 className="text-center z-10 text-monkey-brown relative">
-          <span className="block text-4xl font-sans font-light">HELLO</span>
-          <span className="block text-8xl font-bold">BANANA</span>
+          <span className="block text-4xl font-happy-monkey font-light">
+            HELLO
+          </span>
+          <span className="block text-8xl font-lilita-one">BANANA</span>
         </h1>
       </main>
     </div>

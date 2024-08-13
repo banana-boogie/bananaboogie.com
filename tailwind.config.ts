@@ -15,8 +15,8 @@ const config: Config = {
         "monkey-brown": "#534f2a"
       },
       fontFamily: {
-        "happy-monkey": ["Happy Monkey", "cursive"],
-        "lilita-one": ["Lilita One", "cursive"]
+        "happy-monkey": ["var(--font-happy-monkey), sans"],
+        "lilita-one": ["var(--font-lilita-one), sans"]
       },
       rotate: {
         "13": "13deg"
