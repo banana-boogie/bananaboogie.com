@@ -8,7 +8,7 @@ export const appSections: AppSectionData[] = [
         id: 1,
         name: "Money Manager",
         description: "Where the heck did all my money go?",
-        image: "/images/apps/money-manager.png",
+        image: "/images/apps/money-manager.jpeg",
         link: "/apps/money-manager"
       }
     ]
