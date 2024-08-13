@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
         <Link href="/blog" className="mr-4 hover:underline">
           blog
         </Link>
-        <Link href="/trading-old" className="hover:underline">
+        <Link href="/apps" className="hover:underline">
           apps
         </Link>
       </nav>

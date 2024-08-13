@@ -14,7 +14,7 @@ export function formatNumberWithCommas(number) {
   const decimalPart = parts[1] ? `.${parts[1]}` : "";
 
   // Add commas and spaces every three digits in the whole part
-  const formattedWholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ", ");
+  const formattedWholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   // Combine the formatted parts
   const formattedNumber = formattedWholePart + decimalPart;
